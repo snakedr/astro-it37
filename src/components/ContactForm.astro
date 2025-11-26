@@ -1,56 +1,27 @@
-<<<<<<< HEAD
 ---
+// src/components/ContactForm.astro
+// Компонент формы обратной связи для главной страницы (name, phone)
 ---
-<div class="container" style="max-width: 800px; padding: 40px; background: var(--bg-panel); border: 1px solid var(--accent-dim); box-shadow: 0 0 15px var(--accent-dim);">
-    <h2 style="text-align: center; margin-bottom: 30px;">Отправить Запрос</h2>
-    <form name="contact" method="POST" data-netlify="true" style="display: grid; gap: 20px;">
-        <input type="hidden" name="form-name" value="contact" />
-        
-        <label for="name" style="color: var(--text-gray);">Ваше имя:</label>
-        <input type="text" id="name" name="name" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;" />
-        
-        <label for="email" style="color: var(--text-gray);">Email:</label>
-        <input type="email" id="email" name="email" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;" />
-        
-        <label for="service" style="color: var(--text-gray);">Интересующая услуга:</label>
-        <select id="service" name="service" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: var(--text-gray);">
-            <option value="Проектирование">Проектирование узла</option>
-            <option value="Монтаж">Монтаж и пусконаладка</option>
-            <option value="Обслуживание">Техническое обслуживание</option>
-            <option value="Поверка">Метрологическая поверка</option>
-        </select>
-        
-        <label for="message" style="color: var(--text-gray);">Сообщение:</label>
-        <textarea id="message" name="message" rows="4" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;"></textarea>
-        
-        <button type="submit" class="btn primary" style="width: 100%; justify-content: center; margin-top: 10px;">Отправить</button>
-    </form>
-=======
----
----
-<div class="container" style="max-width: 800px; padding: 40px; background: var(--bg-panel); border: 1px solid var(--accent-dim); box-shadow: 0 0 15px var(--accent-dim);">
-    <h2 style="text-align: center; margin-bottom: 30px;">Отправить Запрос</h2>
-    <form name="contact" method="POST" data-netlify="true" style="display: grid; gap: 20px;">
-        <input type="hidden" name="form-name" value="contact" />
-        
-        <label for="name" style="color: var(--text-gray);">Ваше имя:</label>
-        <input type="text" id="name" name="name" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;" />
-        
-        <label for="email" style="color: var(--text-gray);">Email:</label>
-        <input type="email" id="email" name="email" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;" />
-        
-        <label for="service" style="color: var(--text-gray);">Интересующая услуга:</label>
-        <select id="service" name="service" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: var(--text-gray);">
-            <option value="Проектирование">Проектирование узла</option>
-            <option value="Монтаж">Монтаж и пусконаладка</option>
-            <option value="Обслуживание">Техническое обслуживание</option>
-            <option value="Поверка">Метрологическая поверка</option>
-        </select>
-        
-        <label for="message" style="color: var(--text-gray);">Сообщение:</label>
-        <textarea id="message" name="message" rows="4" required style="padding: 12px; background: #222; border: 1px solid var(--border); color: white;"></textarea>
-        
-        <button type="submit" class="btn primary" style="width: 100%; justify-content: center; margin-top: 10px;">Отправить</button>
-    </form>
->>>>>>> e29c53e0df224674a7c07ae83adf221b4403b04c
-</div>
+
+<section id="contact" class="section">
+    <div class="container" style="text-align: center; max-width: 600px;">
+        <h2>Начните цифровую трансформацию</h2>
+        <p style="color: var(--text-gray); margin-bottom: 40px;">Оставьте заявку на аудит узла учета или консультацию инженера.</p>
+
+        <form name="contact-main" method="POST" data-netlify="true" style="display: grid; gap: 20px;">
+            <input type="hidden" name="form-name" value="contact-main" />
+            <div class="form-dark">
+                <input type="text" name="name" class="inp" placeholder="ФИО" required>
+            </div>
+            <div class="form-dark">
+                <input type="tel" name="phone" class="inp" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            <button type="submit" class="btn primary" style="margin-top: 40px; width: 100%; justify-content: center;">
+                Отправить запрос <span style="font-size: 18px;">›</span>
+            </button>
+            <div style="margin-top: 20px; font-size: 12px; color: var(--text-gray);">
+                Нажимая кнопку, вы соглашаетесь с обработкой данных
+            </div>
+        </form>
+    </div>
+</section>
