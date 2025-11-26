@@ -1,7 +1,6 @@
 ---
 const { title = "IT37 | IT-решения для энергетики", activeLink = "Главная" } = Astro.props;
-// ИМПОРТ: Теперь Astro найдет файл в src/styles/global.css
-import '@/styles/global.css'; 
+// Импорт CSS здесь удален. См. <style is:global> в конце файла.
 ---
 <!DOCTYPE html>
 <html lang="ru">
@@ -17,7 +16,7 @@ import '@/styles/global.css';
     <slot />
     
     <script>
-        // ЛОГИКА БУРГЕР-МЕНЮ
+        // ЛОГИКА БУРГЕР-МЕНЮ (Вынесена сюда, чтобы работала на всех страницах)
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -37,5 +36,9 @@ import '@/styles/global.css';
             }
         });
     </script>
+    
+    <style is:global>
+        @import '@/styles/global.css';
+    </style>
 </body>
 </html>
