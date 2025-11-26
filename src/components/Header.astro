@@ -27,7 +27,7 @@ const { activeLink = "Главная" } = Astro.props;
     </div>
 </header>
 
-<script>
+<script is:inline>
     // Логика бургер-меню
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.querySelector('.menu-toggle');
