@@ -1,0 +1,38 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro'; 
+import ContactBanner from '../components/ContactBanner.astro'; 
+import MetrologiaServices from '../components/MetrologiaServices.astro';
+import ArshinInfo from '../components/ArshinInfo.astro';
+
+// activeLink используется для подсветки активного пункта в Header
+---
+
+<MainLayout title="Метрология и Поверка | IT37" activeLink="Метрология">
+    <Header activeLink="Метрология" />
+    
+    <section class="hero-page">
+        <div class="container">
+            <h1 style="color:var(--accent);">Метрология и Поверка</h1>
+            <p>
+                Обеспечение точности и достоверности показаний приборов учета. **Аккредитованные** методы поверки и внесение данных во ФГИС "Аршин" для соответствия требованиям законодательства.
+            </p>
+            <a href="#contact-block" class="btn">Заказать поверку приборов</a>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <MetrologiaServices />
+        <ArshinInfo />
+    </section>
+
+    <ContactBanner 
+        title="Связаться с метрологическим отделом"
+        phone="+7 (4932) 00-00-00 (доб. 103)"
+        email="metrology@it37.ru"
+        buttonText="Запросить коммерческое предложение"
+    />
+
+    <Footer />
+</MainLayout>

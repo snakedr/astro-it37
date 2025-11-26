@@ -1,0 +1,18 @@
+---
+// Определяем, какие свойства (props) принимает компонент
+const { 
+    title = "Связаться с нами", 
+    phone = "+7 (4932) 37-25-55", 
+    email = "info@it37.ru", 
+    buttonText = "Оставить заявку" 
+} = Astro.props;
+---
+<section id="contact-block" class="contact-banner">
+    <div class="container">
+        <h2>{title}</h2>
+        <p>
+            **Телефон:** {phone} | **E-mail:** {email}
+        </p>
+        <a href="contacts.html" class="btn">{buttonText}</a>
+    </div>
+</section>

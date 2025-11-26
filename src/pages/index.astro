@@ -1,0 +1,44 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Dashboard from '../components/Dashboard.astro';
+// Импортируйте сюда другие компоненты (Footer, Form) по аналогии
+---
+
+<MainLayout title="IT37 | Интеллектуальный Инжиниринг">
+    
+    <Header />
+
+    <section class="hero">
+        <div class="container">
+            <div class="ai-badge">System Online: v.3.0 | AI-Driven</div>
+            <h1>ИТ-ИНЖИНИРИНГ <br> ДЛЯ <span>ПРОМЫШЛЕННОГО</span><br> УЧЕТА</h1>
+            <p class="hero-desc">
+                Группа компаний **IT37**. Мы используем искусственный интеллект для проектирования и учета.
+            </p>
+            <a href="#services" class="btn">Начать проект &darr;</a>
+        </div>
+    </section>
+
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div style="margin-bottom: 40px;">
+                <h2>AI-Аналитика: Эффективность систем</h2>
+                <p style="color:var(--text-gray)">Реальные данные эффективности внедрения наших IT-решений.</p>
+            </div>
+            
+            <Dashboard />
+            
+        </div>
+    </section>
+
+    </MainLayout>
+
+<style>
+    /* Стили, уникальные только для ЭТОЙ страницы */
+    .hero { min-height: 85vh; display: flex; align-items: center; position: relative; }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 30px; line-height: 1.1; }
+    .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
+    .hero-desc { font-size: 18px; color: var(--text-gray); margin-bottom: 50px; max-width: 600px; border-left: 2px solid var(--accent); padding-left: 20px; }
+    .ai-badge { background: var(--accent-dim); color: var(--accent); padding: 5px 10px; font-size: 12px; font-weight: 700; border: 1px solid var(--accent); display: inline-block; margin-bottom: 20px; }
+</style>

@@ -1,0 +1,38 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro'; 
+import ContactBanner from '../components/ContactBanner.astro'; 
+import MaintenanceCards from '../components/MaintenanceCards.astro';
+import ProactiveMaintenanceInfo from '../components/ProactiveMaintenanceInfo.astro';
+
+// activeLink используется для подсветки активного пункта в Header
+---
+
+<MainLayout title="Обслуживание и Ремонт | IT37" activeLink="Обслуживание">
+    <Header activeLink="Обслуживание" />
+    
+    <section class="hero-page">
+        <div class="container">
+            <h1 style="color:var(--success);">Техническое Обслуживание</h1>
+            <p>
+                Обеспечение бесперебойной работы узлов учета. **Превентивное** и **абонентское** обслуживание, позволяющее избежать аварийных ситуаций и штрафов со стороны ресурсоснабжающих организаций.
+            </p>
+            <a href="#contact-block" class="btn">Запросить договор на обслуживание</a>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <MaintenanceCards />
+        <ProactiveMaintenanceInfo />
+    </section>
+
+    <ContactBanner 
+        title="Связаться с отделом Обслуживания"
+        phone="+7 (4932) 37-25-55 (доб. 101)"
+        email="snv@it37.ru"
+        buttonText="Оставить заявку на ремонт или обслуживание"
+    />
+
+    <Footer />
+</MainLayout>

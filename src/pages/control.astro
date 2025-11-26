@@ -1,0 +1,38 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro'; 
+import ContactBanner from '../components/ContactBanner.astro'; // Переиспользуемый
+import AIDashboard from '../components/AIDashboard.astro';
+import ControlFeatures from '../components/ControlFeatures.astro';
+
+// Переменная 'activeLink' нужна для подсветки активного пункта в Header
+---
+
+<MainLayout title="Диспетчеризация | IT37" activeLink="Диспетчеризация">
+    <Header activeLink="Диспетчеризация" />
+    
+    <section class="hero-page">
+        <div class="container">
+            <h1 style="color:var(--accent);">AI-Диспетчеризация</h1>
+            <p>
+                Переход от ручного контроля к интеллектуальному управлению. **Алгоритмы поиска аномалий** и предиктивный анализ для круглосуточного мониторинга и **снижения затрат до 25%**.
+            </p>
+            <a href="#dashboard-block" class="btn">Посмотреть Дашборд</a>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <AIDashboard />
+        <ControlFeatures />
+    </section>
+
+    <ContactBanner 
+        title="Запрос на подключение к Диспетчеризации"
+        phone="+7 (4932) 37-25-55 (доб. 100)"
+        email="np@it37.ru"
+        buttonText="Получить демо-доступ"
+    />
+
+    <Footer />
+</MainLayout>

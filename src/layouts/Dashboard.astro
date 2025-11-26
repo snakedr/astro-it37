@@ -1,0 +1,76 @@
+<div class="dashboard-ui">
+    <div class="chart-section">
+        <div class="chart-header">
+            <div class="font-tech" style="font-size: 14px; display:flex; align-items:center; gap:10px;">
+                <div style="width:10px; height:10px; background:var(--accent); box-shadow:0 0 10px var(--accent);"></div>
+                ENERGY MONITORING <span class="live-badge">LIVE</span>
+            </div>
+            </div>
+
+        <div class="graph-area">
+            <div class="line-old"></div>
+            <div class="line-new"></div>
+            <div class="scanner-line"></div>
+            <div class="savings-overlay">
+                <div class="big-percent">-23%</div>
+                <div class="font-tech" style="font-size:12px; color:var(--accent);">Снижение потерь</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="console-section">
+        <div class="console-header">AI TERMINAL</div>
+        <div class="log-container" id="aiLog"></div>
+        <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+            <div>STATUS: <span style="color:var(--success)">ACTIVE</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Логика консоли
+    const logs = [
+        "Analyzing flow rate data...", "Detected anomaly in sector 7 [FIXED]",
+        "Optimizing pressure...", "Syncing with FGIS ARSHIN...", "Connection stable."
+    ];
+    const logContainer = document.getElementById('aiLog');
+    
+    if (logContainer) {
+        function addLog() {
+            const randomLog = logs[Math.floor(Math.random() * logs.length)];
+            const time = new Date().toLocaleTimeString('ru-RU', {hour12: false});
+            const div = document.createElement('div');
+            div.className = 'log-line';
+            div.innerHTML = `<span>[${time}]</span> > ${randomLog}`;
+            logContainer.prepend(div);
+            if (logContainer.children.length > 8) logContainer.lastElementChild.remove();
+        }
+        setInterval(addLog, 1500);
+        addLog();
+    }
+</script>
+
+<style>
+    /* CSS специфичный для дашборда */
+    .dashboard-ui {
+        background: #0b1221; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+        position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        display: grid; grid-template-columns: 3fr 1fr; font-family: 'JetBrains Mono', monospace;
+    }
+    .chart-section { padding: 40px; border-right: 1px solid var(--border); position: relative; z-index: 1; }
+    .live-badge { font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 2px 6px; border-radius: 4px; animation: blink 2s infinite; }
+    .graph-area { height: 300px; position: relative; border-left: 1px solid var(--text-gray); border-bottom: 1px solid var(--text-gray); }
+    
+    /* Графики и анимации (сокращено для удобства, просто скопируйте из исходника CSS для .line-new, .scanner-line) */
+    .line-new { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0, 242, 255, 0.1), rgba(0, 242, 255, 0.4)); border-top: 2px solid var(--accent); clip-path: polygon(0 90%, 15% 88%, 30% 85%, 45% 82%, 60% 80%, 75% 78%, 90% 76%, 100% 75%, 100% 100%, 0% 100%); width: 0; animation: draw 2s ease-out forwards 0.5s; }
+    @keyframes draw { to { width: 100%; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    .console-section { background: rgba(0,0,0,0.3); padding: 20px; font-size: 12px; color: var(--accent); display: flex; flex-direction: column; }
+    .big-percent { font-family: 'Orbitron'; font-size: 64px; font-weight: 900; color: transparent; -webkit-text-stroke: 1px var(--accent); }
+    
+    @media (max-width: 900px) {
+        .dashboard-ui { grid-template-columns: 1fr; }
+        .console-section { display: none; }
+    }
+</style>

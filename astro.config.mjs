@@ -1,0 +1,21 @@
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+
+// Импортируйте адаптеры здесь, если будете использовать SSR (Node.js)
+// Но для статического сайта это не нужно.
+
+export default defineConfig({
+  // Указываем, что проект — статический (собирается в HTML/CSS/JS)
+  output: 'static', 
+
+  // Директория для страниц и компонентов:
+  srcDir: './src', 
+
+  // Порт для локальной разработки:
+  server: {
+    port: 3000
+  },
+
+  // Если вы добавите интеграции (React, Vue и т.д.), они будут здесь.
+  // integrations: [],
+});

@@ -1,0 +1,96 @@
+---
+// Фронтматтер пуст, так как компонент не принимает props
+---
+<div class="container">
+    <h2>Эффективность под контролем AI</h2>
+    <p style="color:var(--text-gray); max-width: 800px; margin-bottom: 20px;">
+        Наш дашборд визуализирует работу узла учета. Система Poverka37 (или Ваше название) анализирует входящие потоки данных и прогнозирует отклонения, позволяя перейти от реактивного обслуживания к **предиктивному**.
+    </p>
+    
+    <div id="dashboard-block" class="ai-dashboard">
+        <div class="matrix-container">
+            <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+        </div>
+
+        <div class="dashboard-header">
+            <span class="data-value">100%</span>
+            <span class="data-value data-optimized">-23%</span>
+            <span class="dashboard-live">LIVE DATA</span>
+        </div>
+        <div style="flex-grow: 1; position: relative;"> 
+            </div>
+        <div class="dashboard-data">
+            <span class="data-point">Без оптимизации</span>
+            <span class="data-point" style="color: var(--success);">С системой IT37 Control</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- ЛОГИКА ЭФФЕКТА МАТРИЦЫ ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('matrixCanvas');
+        if (!canvas) return; // Защита от отсутствия элемента
+
+        const context = canvas.getContext('2d');
+        const dashboard = document.getElementById('dashboard-block');
+        
+        // Функции установки и обновления размера Canvas
+        const setCanvasSize = () => {
+            if (dashboard) {
+                canvas.width = dashboard.clientWidth;
+                canvas.height = dashboard.clientHeight;
+            }
+        };
+
+        // Устанавливаем размер канваса при загрузке и изменении размера окна
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ!@#$%^&*()_+-=~`<>,.?/|{}[]';
+        const fontSize = 16; 
+        
+        // Пересчитываем столбцы при каждом изменении размера
+        let columns = canvas.width / fontSize;
+        let drops = [];
+        
+        // Функция инициализации drops
+        const initDrops = () => {
+            columns = canvas.width / fontSize;
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1; 
+            }
+        };
+
+        // Пересчитываем drops при изменении размера
+        window.addEventListener('resize', initDrops);
+        initDrops(); // Первоначальная инициализация
+
+        const drawMatrix = () => {
+            context.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = '#00f2ff'; 
+            context.font = `${fontSize}px monospace`;
+
+            // Убедимся, что drops соответствует текущему числу столбцов (на случай, если resize не успел)
+            if (drops.length !== Math.floor(canvas.width / fontSize)) {
+                initDrops();
+            }
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+                context.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0; 
+                }
+                drops[i]++; 
+            }
+        };
+
+        // Запускаем анимацию
+        setInterval(drawMatrix, 50); 
+    });
+</script>
