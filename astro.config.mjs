@@ -1,27 +1,21 @@
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import path from 'path';
-// !!! НОВЫЙ ИМПОРТ: для работы с модульными путями
 import { fileURLToPath } from 'url';
 
-// !!! НОВАЯ ПЕРЕМЕННАЯ: Определяем __dirname для ES-модулей
+// ... (определение __dirname и __filename, как мы делали ранее)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ... (остальной код)
-
 export default defineConfig({
-  // ... (существующий код конфигурации)
+  // Указываем, что проект — статический (собирается в HTML/CSS/JS)
+  output: 'static',
   
-  // Явная настройка алиасов для Vite
-  vite: {
-    resolve: {
-      alias: {
-        // Теперь __dirname будет работать
-        '@': path.resolve(__dirname, './src'), 
-      },
-    },
-  },
+  // !!! НОВАЯ СТРОКА: Установка базового пути для всех ссылок
+  base: '/', 
 
-  // ... (остальной код)
+  // Директория для страниц и компонентов:
+  srcDir: './src', 
+
+  // ... (остальной код, включая секцию vite)
 });
