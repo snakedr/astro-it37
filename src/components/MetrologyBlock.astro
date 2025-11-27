@@ -66,7 +66,7 @@
         align-items: center; 
         justify-content: center; 
         position: relative;
-        overflow: hidden; /* Важно, чтобы луч не выходил за круг */
+        overflow: hidden; 
     }
     .verified-text {
         font-family: 'Orbitron', sans-serif; 
@@ -79,22 +79,29 @@
     /* ИСПРАВЛЕННЫЕ СТИЛИ для вращающегося луча */
     .scanner-ray {
         position: absolute;
-        bottom: 50%; /* Сдвигаем луч вверх, чтобы его нижний край был в центре */
+        bottom: 50%; 
         left: 50%; 
-        transform-origin: 50% 100%; /* Точка вращения: нижний центр луча */
+        transform-origin: 50% 100%; 
         
-        width: 2px; /* Узкий луч */
-        height: 125px; /* Радиус круга */
-        background: var(--accent);
-        box-shadow: 0 0 15px var(--accent);
+        width: 3px; 
+        height: 125px; 
         
-        animation: scan 4s linear infinite;
+        background: linear-gradient(0deg, rgba(0, 242, 255, 0.1) 0%, var(--accent) 80%, rgba(0, 242, 255, 0.2) 100%);
+        box-shadow: 0 0 8px var(--accent);
+        
+        /* ИСПОЛЬЗУЕМ НОВОЕ ИМЯ АНИМАЦИИ */
+        animation: circleRotate 4s linear infinite; 
         z-index: 5;
     }
 
-    /* Анимация для вращения */
-    @keyframes scan {
+    /* АНИМАЦИЯ: Новое имя для вращения */
+    @keyframes circleRotate {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 900px) {
+        .metrology-content { flex-direction: column; }
+        .metrology-viz { margin-top: 30px; }
     }
 </style>
