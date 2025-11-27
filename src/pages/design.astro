@@ -7,17 +7,17 @@ import DesignProcess from '@/components/DesignProcess.astro';
 import DesignVizBlock from '@/components/DesignVizBlock.astro';
 // Header и Footer НЕ ИМПОРТИРУЕМ, они должны быть в MainLayout
 
-// 2. Если вы использовали 'activeLink' для Header, вы передаете его в Layout
-// Layout должен знать, как передать его в Header.
+// 2. Указываем активную ссылку для навигации
 ---
 
-<MainLayout title="Проектирование и Аудит | IT37">
+<MainLayout title="Проектирование и Аудит | IT37" activeLink="design">
     
     <section class="hero-page">
         <div class="container">
             <h1 style="color:var(--accent);">Проектирование и Аудит</h1>
             <p>
-                Разработка документации для узлов учета тепловой энергии, воды и газа. **AI-моделирование** для оптимизации расчетов и гарантия успешного согласования проекта в РСО.
+                Разработка документации для узлов учета тепловой энергии, воды и газа.
+                **AI-моделирование** для оптимизации расчетов и гарантия успешного согласования проекта в РСО.
             </p>
             <a href="#contact-block" class="btn">Запросить аудит документации</a>
         </div>
@@ -26,10 +26,14 @@ import DesignVizBlock from '@/components/DesignVizBlock.astro';
     <section class="section" style="padding-top: 0;">
         <div class="container">
             
-            <DesignAdvantages />
-            <DesignProcess />
             <DesignVizBlock />
             
+            <h2 style="margin-top: 80px;">Наши ключевые преимущества</h2>
+            <DesignAdvantages /> 
+            
+            <h2 style="margin-top: 80px;">Этапы работ</h2>
+            <DesignProcess />
+     
             <div class="info-card" style="margin-top: 50px;">
                 <h3 style="color:var(--text-main);">Аудит существующей документации</h3>
                 <p style="color:var(--text-gray); margin-top:10px;">Проведем экспертизу имеющегося проекта на соответствие нормам и требованиям РСО, выявим потенциальные проблемы и предложим решения для оптимизации. Это позволит сэкономить время и средства на этапе монтажа.</p>

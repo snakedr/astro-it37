@@ -1,13 +1,14 @@
 ---
+// src/components/DesignProcess.astro (Исправленный)
 ---
-<h2 style="margin-top: 80px;">Этапы работ</h2>
 <div class="process-grid">
     
     <div class="step-card">
         <div class="step-num">01</div>
         <h3>Аудит и ТЗ</h3>
         <p>
-            Мы начинаем с глубокого анализа ваших потребностей и текущего состояния объекта. Фиксируем требования ресурсоснабжающей организации и готовим исчерпывающее Техническое Задание, которое станет основой для всего проекта.
+            Мы начинаем с глубокого анализа ваших потребностей и текущего состояния объекта.
+            Фиксируем требования ресурсоснабжающей организации и готовим исчерпывающее Техническое Задание, которое станет основой для всего проекта.
         </p>
     </div>
 
@@ -15,7 +16,8 @@
         <div class="step-num">02</div>
         <h3>AI-Расчет и Схемы</h3>
         <p>
-            Наши инженеры разрабатывают полный комплект схем (гидравлические, принципиальные, электрические). AI-моделирование подбирает оптимальные диаметры, тип приборов и их расположение для максимальной энергоэффективности.
+            Наши инженеры разрабатывают полный комплект схем (гидравлические, принципиальные, электрические).
+            AI-моделирование подбирает оптимальные диаметры, тип приборов и их расположение для максимальной энергоэффективности.
         </p>
     </div>
 
@@ -23,15 +25,17 @@
         <div class="step-num">03</div>
         <h3>Комплект Документации</h3>
         <p>
-            Вы получаете готовый к согласованию пакет: пояснительные записки, сметы, спецификации оборудования и подробные чертежи. Документация полностью соответствует **ГОСТ Р 21.1101-2013**.
+            Вы получаете готовый к согласованию пакет: пояснительные записки, сметы, спецификации оборудования и подробные чертежи.
+            Документация полностью соответствует **ГОСТ Р 21.1101-2013**.
         </p>
     </div>
 </div>
 
 <style>
-    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+    .process-grid { display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
     .step-card { 
-        background: var(--bg-panel); 
+        background: var(--bg-panel);
         padding: 30px; 
         border-left: 3px solid var(--accent); 
         position: relative; 
@@ -43,17 +47,18 @@
     }
     .step-card h3 { 
         color: var(--accent); 
-        font-size: 18px; 
+        font-size: 18px;
         margin-bottom: 10px; 
         font-family: 'Orbitron', sans-serif;
         text-transform: uppercase;
         letter-spacing: 2px;
     }
-    .step-card p { color: var(--text-gray); }
+    .step-card p { color: var(--text-gray);
+    }
     .step-num { 
         position: absolute; 
         top: 10px; 
-        right: 20px; 
+        right: 20px;
         font-family: 'Orbitron'; 
         font-size: 40px; 
         color: var(--border); 
@@ -61,6 +66,7 @@
     }
 
     @media (max-width: 900px) {
-        .process-grid { grid-template-columns: 1fr; }
+        .process-grid { grid-template-columns: 1fr;
+        }
     }
 </style>
