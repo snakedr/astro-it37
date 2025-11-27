@@ -1,10 +1,10 @@
 ---
 // src/layouts/MainLayout.astro
-import Header from '@/components/Header.astro'; // <--- 1. ДОБАВЛЕН ИМПОРТ HEADER
+import Header from '@/components/Header.astro';
+import '@/styles/global.css';
 
-// Важно: активная ссылка по умолчанию 'home', а не 'Главная'
+// Важно: активная ссылка по умолчанию 'home'
 const { title = "IT37 | IT-решения для энергетики", activeLink = "home" } = Astro.props; 
-// ...
 ---
 <!DOCTYPE html>
 <html lang="ru">
@@ -16,12 +16,12 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
 </head>
 <body>
 
-    <div class="grid-bg"></div>
+    <div class="grid-bg"></div> 
     
     <Header activeLink={activeLink} /> <slot />
     
     <script>
-        // ЛОГИКА БУРГЕР-МЕНЮ
+        // ЛОГИКА БУРГЕР-МЕНЮ (Вынесена сюда, чтобы работала на всех страницах)
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -44,17 +44,25 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
     </script>
     
     <style is:global>
-        /* Базовые стили */
-        html { scroll-behavior: smooth; }
-        body { 
-            background-color: var(--bg-deep); 
-            color: var(--text-main);
-            font-family: 'Roboto', sans-serif;
-            min-height: 100vh;
+        /* Базовые стили контейнеров и секций, которые не всегда в global.css */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
             position: relative;
         }
 
-        /* Фоновая сетка */
+        /* Hero */
+        .hero-page {
+            padding-top: 150px;
+            padding-bottom: 50px;
+        }
+        
+        /* Анимация фона сетки (зависит от переменных из global.css) */
         .grid-bg {
             position: fixed;
             top: 0;
@@ -76,15 +84,6 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
             from { background-position: 0 0; }
             to { background-position: 50px 50px; }
         }
-        
-        /* Стили контейнера/секций/кнопок, которые не были в global.css (или вынесены из него) */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .hero-page { padding-top: 150px; padding-bottom: 50px; }
-        .section { padding: 100px 0; position: relative; }
         
         @media (max-width: 900px) {
             .section { padding: 50px 0; }
