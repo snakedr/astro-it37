@@ -1,6 +1,10 @@
 ---
-const { title = "IT37 | IT-решения для энергетики", activeLink = "Главная" } = Astro.props;
-// Импорт CSS здесь удален. См. <style is:global> в конце файла.
+// src/layouts/MainLayout.astro
+import Header from '@/components/Header.astro'; // <--- 1. ДОБАВЛЕН ИМПОРТ HEADER
+
+// Важно: активная ссылка по умолчанию 'home', а не 'Главная'
+const { title = "IT37 | IT-решения для энергетики", activeLink = "home" } = Astro.props; 
+// ...
 ---
 <!DOCTYPE html>
 <html lang="ru">
@@ -13,10 +17,11 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
 <body>
 
     <div class="grid-bg"></div>
-    <slot />
+    
+    <Header activeLink={activeLink} /> <slot />
     
     <script>
-        // ЛОГИКА БУРГЕР-МЕНЮ (Вынесена сюда, чтобы работала на всех страницах)
+        // ЛОГИКА БУРГЕР-МЕНЮ
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -27,6 +32,7 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
                     menuToggle.classList.toggle('open');
                 });
 
+                // Закрытие меню при клике на ссылку
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         navLinks.classList.remove('open');
@@ -38,7 +44,52 @@ const { title = "IT37 | IT-решения для энергетики", activeLi
     </script>
     
     <style is:global>
-        @import '@/styles/global.css';
+        /* Базовые стили */
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: var(--bg-deep); 
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Фоновая сетка */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            /* Переменные берутся из global.css */
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: moveGrid 60s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+        
+        /* Стили контейнера/секций/кнопок, которые не были в global.css (или вынесены из него) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .hero-page { padding-top: 150px; padding-bottom: 50px; }
+        .section { padding: 100px 0; position: relative; }
+        
+        @media (max-width: 900px) {
+            .section { padding: 50px 0; }
+            .hero-page { padding-top: 100px; }
+        }
     </style>
 </body>
 </html>

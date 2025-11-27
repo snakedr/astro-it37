@@ -1,7 +1,7 @@
 ---
-// src/components/HeaderFixed.astro
+// src/components/Header.astro (С ИСПРАВЛЕННЫМИ КЛЮЧАМИ)
 // Принимаем activeLink для подсветки активного пункта
-const { activeLink = "Главная" } = Astro.props;
+const { activeLink = "home" } = Astro.props; // Используем "home" по умолчанию
 ---
 
 <header>
@@ -15,41 +15,75 @@ const { activeLink = "Главная" } = Astro.props;
         </button>
 
         <nav class="nav-links">
-            <a href="/" class={activeLink === 'Главная' ? 'active' : ''}>Главная</a>
-            <a href="/design" class={activeLink === 'Проектирование' ? 'active' : ''}>Проектирование</a>
-            <a href="/montazh" class={activeLink === 'Монтаж' ? 'active' : ''}>Монтаж</a>
-            <a href="/control" class={activeLink === 'Диспетчеризация' ? 'active' : ''}>Диспетчеризация</a>
-            <a href="/metrologia" class={activeLink === 'Метрология' ? 'active' : ''}>Метрология</a>
-            <a href="/maintenance" class={activeLink === 'Обслуживание' ? 'active' : ''}>Обслуживание</a>
-            <a href="/contacts" class={activeLink === 'Контакты' ? 'active' : ''}>Контакты</a>
+            <a href="/" class={activeLink === 'home' ? 'active' : ''}>Главная</a>
+            <a href="/design" class={activeLink === 'design' ? 'active' : ''}>Проектирование</a>
+            <a href="/montazh" class={activeLink === 'montazh' ? 'active' : ''}>Монтаж</a>
+            <a href="/control" class={activeLink === 'control' ? 'active' : ''}>Диспетчеризация</a>
+            <a href="/metrologia" class={activeLink === 'metrologia' ? 'active' : ''}>Метрология</a>
+            <a href="/maintenance" class={activeLink === 'maintenance' ? 'active' : ''}>Обслуживание</a>
+            <a href="/contacts" class={activeLink === 'contacts' ? 'active' : ''}>Контакты</a>
         </nav>
         <a href="/contacts" class="btn primary desktop-only">Запрос на аудит</a>
     </div>
 </header>
 
-<script is:inline>
-    // Логика бургер-меню
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('open');
-                menuToggle.classList.toggle('open');
-            });
-
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('open');
-                    menuToggle.classList.remove('open');
-                });
-            });
-        }
-    });
-</script>
-
 <style>
+    /* ... (Ваши стили для header) */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 5, 7, 0.9); /* Полупрозрачный фон */
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        z-index: 100;
+        padding: 15px 0;
+    }
+    .nav-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 24px;
+        color: var(--text-main);
+        letter-spacing: 2px;
+        font-weight: 900;
+        cursor: pointer;
+    }
+    .logo span {
+        color: var(--accent);
+        text-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        margin-left: auto;
+        margin-right: 30px;
+    }
+
+    .nav-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        padding: 5px 0;
+        transition: color 0.3s, border-bottom 0.3s;
+        border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+    }
+    .nav-links a.active {
+        font-weight: 500;
+    }
+
     /* Стили для бургер-меню и навигации */
     .menu-toggle {
         display: none; /* Скрыто на больших экранах */
@@ -77,6 +111,9 @@ const { activeLink = "Главная" } = Astro.props;
     }
 
     @media (max-width: 900px) {
+        .menu-toggle { display: block; }
+        .btn.desktop-only { display: none; }
+        
         .nav-links {
             position: fixed;
             top: 0;
@@ -91,24 +128,24 @@ const { activeLink = "Главная" } = Astro.props;
             transition: transform 0.4s ease-in-out;
             z-index: 99;
         }
+        
+        .nav-links a {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            border-left: 5px solid transparent;
+            font-size: 18px;
+            font-family: 'Orbitron', sans-serif;
+            transition: border-left-color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            border-left-color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
 
         .nav-links.open {
             transform: translateX(0);
-        }
-
-        .nav-links a {
-            padding: 15px 24px;
-            border-bottom: 1px solid var(--border);
-            width: 100%;
-            display: block;
-        }
-
-        .menu-toggle {
-            display: block;
-        }
-
-        .btn.desktop-only {
-            display: none;
         }
     }
 </style>
