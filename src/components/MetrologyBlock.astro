@@ -56,7 +56,6 @@
         margin-top: -10px;
     }
 
-
     /* Стили для ВИЗУАЛИЗАЦИИ */
     .verified-circle {
         width: 250px; 
@@ -77,21 +76,18 @@
         letter-spacing: 2px;
     }
 
-    /* ИСПРАВЛЕНИЕ: Стили для вращающегося луча */
+    /* ИСПРАВЛЕННЫЕ СТИЛИ для вращающегося луча */
     .scanner-ray {
         position: absolute;
-        top: 0;
-        left: 50%; /* Центруем по горизонтали */
-        transform-origin: 0% 50%; /* Точка вращения: центр круга */
+        bottom: 50%; /* Сдвигаем луч вверх, чтобы его нижний край был в центре */
+        left: 50%; 
+        transform-origin: 50% 100%; /* Точка вращения: нижний центр луча */
         
-        /* Размеры луча */
-        width: 150%; /* Должен быть шире круга, чтобы полностью его перекрыть */
-        height: 2px; 
-        background: linear-gradient(90deg, transparent, var(--accent) 50%, transparent); /* Эффект градиентного луча */
-        opacity: 0.6;
+        width: 2px; /* Узкий луч */
+        height: 125px; /* Радиус круга */
+        background: var(--accent);
         box-shadow: 0 0 15px var(--accent);
-
-        /* Анимация */
+        
         animation: scan 4s linear infinite;
         z-index: 5;
     }
