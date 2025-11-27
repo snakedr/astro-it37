@@ -1,46 +1,122 @@
 ---
 ---
-<div class="container">
-    <div class="design-viz-block">
-        <h3>BIM-Моделирование: Генерация Проекта</h3>
-        <div class="viz-placeholder">
+<div class="design-viz-block">
+    <h3>BIM-Моделирование: Генерация Проекта</h3>
+    <div class="viz-placeholder">
+        
+        <svg class="blueprint-svg" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
             
-            <svg class="blueprint-svg" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
-                
-                <g class="draw-path">
-                    <path d="M 50 80 L 450 80" />
-                    <path d="M 120 50 L 120 110" />
-                    <path d="M 380 50 L 380 110" />
-                    <rect x="180" y="50" width="100" height="60" />
-                    <path d="M 220 80 L 220 40" />
-                    <path d="M 60 70 L 110 90" />
-                    <path d="M 60 90 L 110 70" />
-                </g>
+            <g class="draw-path">
+                <path d="M 50 80 L 450 80" />
+                <path d="M 120 50 L 120 110" />
+                <path d="M 380 50 L 380 110" />
+                <rect x="180" y="50" width="100" height="60" />
+                <path d="M 220 80 L 220 40" />
+                <path d="M 60 70 L 110 90" />
+                <path d="M 60 90 L 110 70" />
+            </g>
 
-                <g class="draw-path draw-delay">
-                    <path d="M 50 180 L 450 180" />
-                    <path d="M 150 150 L 150 210" />
-                    <path d="M 400 150 L 400 210" />
-                    <rect x="250" y="150" width="100" height="60" />
-                    <path d="M 300 180 L 300 220" />
-                    <path d="M 400 170 L 450 190" />
-                    <path d="M 400 190 L 450 170" />
-                </g>
+            <g class="draw-path draw-delay">
+                <path d="M 50 180 L 450 180" />
+                <path d="M 150 150 L 150 210" />
+                <path d="M 400 150 L 400 210" />
+                <rect x="250" y="150" width="100" height="60" />
+                <path d="M 300 180 L 300 220" />
+                <path d="M 400 170 L 450 190" />
+                <path d="M 400 190 L 450 170" />
+            </g>
 
-                <g class="draw-path" style="animation-delay: 4.5s;">
-                    <path d="M 220 40 L 250 10 L 300 10 L 300 40" /> 
-                    <rect x="230" y="10" width="80" height="30" />
-                </g>
-                
-            </svg>
+            <g class="draw-path" style="animation-delay: 4.5s;">
+                <path d="M 220 40 L 250 10 L 300 10 L 300 40" /> 
+                <rect x="230" y="10" width="80" height="30" />
+            </g>
             
-            <div class="viz-status">
-                >> PROJECT UUTE: **KRASNODAR-01**<br>
-                >> LASER TRACING: ACTIVE
-            </div>
+        </svg>
+        
+        <div class="viz-status">
+            >> PROJECT UUTE: **IVANOVO-01**<br>
+            >> LASER TRACING: ACTIVE
         </div>
-        <p style="color:var(--text-gray); font-size:14px; margin-top:15px;">
-            Создаем точную цифровую модель узла учета, исключая ошибки на этапе монтажа.
-        </p>
     </div>
+    <p style="color:var(--text-gray); font-size:14px; margin-top:15px;">
+        Создаем точную цифровую модель узла учета, исключая ошибки на этапе монтажа.
+    </p>
 </div>
+
+<style>
+    .design-viz-block {
+        margin-top: 80px;
+        padding: 40px;
+        background: var(--bg-panel);
+        border: 1px solid var(--accent);
+        text-align: center;
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.05);
+    }
+    .design-viz-block h3 {
+        color: var(--accent);
+        margin-bottom: 20px;
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .viz-placeholder {
+        min-height: 400px;
+        background-color: #050507;
+        background-image: 
+            linear-gradient(rgba(0, 242, 255, 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 242, 255, 0.15) 1px, transparent 1px);
+        background-size: 30px 30px; 
+        border: 1px solid var(--accent-dim);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .blueprint-svg {
+        width: 90%;
+        height: auto;
+        max-width: 700px;
+        filter: drop-shadow(0 0 8px var(--accent)); 
+    }
+
+    .draw-path {
+        stroke: var(--accent);
+        stroke-width: 3;
+        stroke-linecap: round;
+        fill: none;
+        stroke-dasharray: 2000;
+        stroke-dashoffset: 2000;
+        animation: laser-draw 5s ease-in-out infinite;
+    }
+
+    .draw-delay {
+        animation-delay: 2.5s;
+    }
+
+    @keyframes laser-draw {
+        0% { stroke-dashoffset: 2000; opacity: 0; }
+        10% { opacity: 1; }
+        80% { stroke-dashoffset: 0; opacity: 1; }
+        90% { opacity: 1; }
+        100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+
+    .viz-status {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--success);
+        font-size: 12px;
+        text-align: left;
+        z-index: 10;
+        text-shadow: 0 0 5px rgba(0, 255, 128, 0.5);
+    }
+
+    @media (max-width: 900px) {
+        .viz-placeholder { min-height: 300px; }
+    }
+</style>

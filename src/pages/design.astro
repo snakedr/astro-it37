@@ -1,21 +1,17 @@
 ---
 // 1. Импорт всех необходимых компонентов
 import MainLayout from '@/layouts/MainLayout.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro'; // Убедитесь, что он создан
-import ContactBanner from '@/components/ContactBanner.astro'; // Создадим его ниже
+import ContactBanner from '@/components/ContactBanner.astro'; 
 import DesignAdvantages from '@/components/DesignAdvantages.astro';
 import DesignProcess from '@/components/DesignProcess.astro';
 import DesignVizBlock from '@/components/DesignVizBlock.astro';
+// Header и Footer НЕ ИМПОРТИРУЕМ, они должны быть в MainLayout
 
-// 2. Все CSS-стили, которые были в <style> на этой странице, нужно ПЕРЕНЕСТИ 
-// в <style> внутри MainLayout.astro (или в отдельный CSS-файл, если стилей очень много).
-// В данном случае, так как стили специфичны для карточек,
-// их лучше оставить внутри MainLayout.astro в секции <style>.
+// 2. Если вы использовали 'activeLink' для Header, вы передаете его в Layout
+// Layout должен знать, как передать его в Header.
 ---
 
-<MainLayout title="Проектирование и Аудит | IT37" activeLink="Проектирование">
-    <Header activeLink="Проектирование" />
+<MainLayout title="Проектирование и Аудит | IT37">
     
     <section class="hero-page">
         <div class="container">
@@ -27,22 +23,21 @@ import DesignVizBlock from '@/components/DesignVizBlock.astro';
         </div>
     </section>
 
-    <DesignAdvantages />
-
     <section class="section" style="padding-top: 0;">
-        <DesignProcess />
-
-        <DesignVizBlock />
-
         <div class="container">
+            
+            <DesignAdvantages />
+            <DesignProcess />
+            <DesignVizBlock />
+            
             <div class="info-card" style="margin-top: 50px;">
                 <h3 style="color:var(--text-main);">Аудит существующей документации</h3>
                 <p style="color:var(--text-gray); margin-top:10px;">Проведем экспертизу имеющегося проекта на соответствие нормам и требованиям РСО, выявим потенциальные проблемы и предложим решения для оптимизации. Это позволит сэкономить время и средства на этапе монтажа.</p>
             </div>
+
         </div>
     </section>
 
     <ContactBanner />
 
-    <Footer />
 </MainLayout>
