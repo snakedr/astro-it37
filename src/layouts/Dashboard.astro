@@ -7,12 +7,23 @@
                 <div style="width:10px; height:10px; background:var(--accent); box-shadow:0 0 10px var(--accent);"></div>
                 ENERGY MONITORING <span class="live-badge">LIVE</span>
             </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="dot red"></div>Учет без AI
+                </div>
+                <div class="legend-item">
+                    <div class="dot blue"></div>С системой IT37
+                </div>
+            </div>
         </div>
 
         <div class="graph-area">
             <div class="line-old"></div>
             <div class="line-new"></div>
+            
             <div class="scanner-line"></div>
+            
             <div class="savings-overlay">
                 <div class="big-percent">-23%</div>
                 <div class="font-tech" style="font-size:12px; color:var(--accent);">Снижение потерь</div>
@@ -25,6 +36,7 @@
         <div class="log-container" id="aiLog"></div>
         <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
             <div>STATUS: <span style="color:var(--success)">ACTIVE</span></div>
+            <div>UPTIME: 99.9%</div>
         </div>
     </div>
 </div>
@@ -50,51 +62,94 @@
             if (logContainer.children.length > 8) logContainer.lastElementChild.remove();
         }
         setInterval(addLog, 1500);
-        addLog(); // Запускаем первую строку сразу
+        addLog(); 
     }
 </script>
 
 <style>
-    /* CSS специфичный для дашборда */
+    /* Основная сетка */
     .dashboard-ui {
-        background: #0b1221; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-        position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        display: grid; grid-template-columns: 3fr 1fr; font-family: 'JetBrains Mono', monospace;
+        background: #0b1221; 
+        border: 1px solid rgba(255,255,255,0.1); 
+        border-radius: 12px;
+        position: relative; 
+        overflow: hidden; 
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        display: grid; 
+        grid-template-columns: 3fr 1fr; 
+        font-family: 'JetBrains Mono', monospace;
     }
     .chart-section { padding: 40px; border-right: 1px solid var(--border); position: relative; z-index: 1; }
+    .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+    
     .live-badge { font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 2px 6px; border-radius: 4px; animation: blink 2s infinite; }
+    
+    /* Стили легенды */
+    .legend { display: flex; gap: 20px; font-size: 12px; }
+    .legend-item { display: flex; align-items: center; color: var(--text-gray); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+    .dot.red { background: var(--orange); box-shadow: 0 0 10px var(--orange); }
+    .dot.blue { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
     .graph-area { height: 300px; position: relative; border-left: 1px solid var(--text-gray); border-bottom: 1px solid var(--text-gray); }
     
-    /* Стили графиков и анимаций (полные) */
-    .line-old { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(255, 77, 77, 0.1), rgba(255, 77, 77, 0.4)); border-top: 2px solid var(--orange); clip-path: polygon(0 80%, 10% 75%, 25% 70%, 40% 65%, 55% 60%, 70% 55%, 85% 50%, 100% 45%, 100% 100%, 0% 100%); opacity: 0.5; }
-    .line-new { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0, 242, 255, 0.1), rgba(0, 242, 255, 0.4)); border-top: 2px solid var(--accent); clip-path: polygon(0 90%, 15% 88%, 30% 85%, 45% 82%, 60% 80%, 75% 78%, 90% 76%, 100% 75%, 100% 100%, 0% 100%); width: 0; animation: draw 2s ease-out forwards 0.5s; }
-    .scanner-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: scan 3s linear infinite; opacity: 0.7; }
+    /* Графики */
+    .line-old { 
+        position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+        background: linear-gradient(0deg, rgba(255, 77, 77, 0.1), rgba(255, 77, 77, 0.4)); 
+        border-top: 2px solid var(--orange); 
+        clip-path: polygon(0 80%, 10% 75%, 25% 70%, 40% 65%, 55% 60%, 70% 55%, 85% 50%, 100% 45%, 100% 100%, 0% 100%); 
+        opacity: 0.5; 
+    }
+    .line-new { 
+        position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+        background: linear-gradient(0deg, rgba(0, 242, 255, 0.1), rgba(0, 242, 255, 0.4)); 
+        border-top: 2px solid var(--accent); 
+        clip-path: polygon(0 90%, 15% 88%, 30% 85%, 45% 82%, 60% 80%, 75% 78%, 90% 76%, 100% 75%, 100% 100%, 0% 100%); 
+        width: 0; 
+        animation: draw 2s ease-out forwards 0.5s; 
+    }
+
+    /* ИСПРАВЛЕНИЕ 2: Горизонтальный сканер */
+    .scanner-line { 
+        position: absolute; top: 0; left: 0; 
+        width: 2px; height: 100%; 
+        background: rgba(255,255,255,0.5); 
+        box-shadow: 0 0 15px white; 
+        z-index: 10; 
+        animation: scan 4s linear infinite; 
+        opacity: 0;
+    }
     
     @keyframes draw { to { width: 100%; } }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-    @keyframes scan { 0% { transform: translateY(0); } 50% { transform: translateY(300px); } 100% { transform: translateY(0); } }
+    
+    /* Анимация сканирования слева направо */
+    @keyframes scan { 
+        0% { left: 0; opacity: 0; } 
+        10% { opacity: 1; } 
+        90% { opacity: 1; } 
+        100% { left: 100%; opacity: 0; } 
+    }
 
     .savings-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
-    .big-percent { font-family: 'Orbitron'; font-size: 64px; font-weight: 900; color: transparent; -webkit-text-stroke: 1px var(--accent); line-height: 1; }
+    .big-percent { font-family: 'Orbitron'; font-size: 64px; font-weight: 900; color: transparent; -webkit-text-stroke: 1px var(--accent); line-height: 1; text-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
     
-    /* Стили Консоли */
+    /* Консоль */
     .console-section { background: rgba(0,0,0,0.3); padding: 20px; font-size: 12px; color: var(--accent); display: flex; flex-direction: column; }
-    .console-header { margin-bottom: 15px; font-weight: 700; border-bottom: 1px dashed var(--accent); padding-bottom: 5px; }
-    .log-container { flex-grow: 1; overflow: hidden; display: flex; flex-direction: column-reverse; /* Новые логи сверху */ }
+    .console-header { margin-bottom: 15px; font-weight: 700; border-bottom: 1px dashed var(--accent); padding-bottom: 5px; color: white; }
+    .log-container { flex-grow: 1; overflow: hidden; display: flex; flex-direction: column-reverse; opacity: 0.8; }
     .log-line { padding: 4px 0; border-bottom: 1px dashed rgba(0, 242, 255, 0.1); }
     .log-line span { color: var(--text-gray); margin-right: 5px; }
 
 
-    /* МЕДИА-ЗАПРОСЫ (Исправлено: консоль теперь не скрывается) */
+    /* Медиа-запросы */
     @media (max-width: 900px) {
         .dashboard-ui { grid-template-columns: 1fr; }
         .chart-section { border-right: none; padding: 20px; }
-        .console-section { 
-            padding: 20px; 
-            /* Удален display: none; */
-        }
+        .console-section { padding: 20px; border-top: 1px solid var(--border); }
         .graph-area { height: 200px; }
         .big-percent { font-size: 48px; }
-        @keyframes scan { 50% { transform: translateY(200px); } } /* Коррекция для меньшей высоты */
+        .legend { display: none; } /* Можно скрыть легенду на мобильных, если мешает */
     }
 </style>
