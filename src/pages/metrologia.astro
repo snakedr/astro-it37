@@ -2,14 +2,16 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-// Используем ConstrainedContactBanner для ограниченной ширины
 import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
-// Компоненты для контента (будут созданы ниже)
+
+// !!! ИМПОРТИРУЕМ НОВЫЙ ВИДЖЕТ !!!
+import MetrologiaViz from '@/components/MetrologiaViz.astro'; 
+
 import MetrologiaCards from '@/components/MetrologiaCards.astro';
 import MetrologiaProcess from '@/components/MetrologiaProcess.astro';
 
 const ACTIVE_LINK = "Метрология";
-const PHONE_METRO = "+7 (4932) 37-25-55 (доб. 105)";
+const PHONE_METRO = "+7 (4932) 37-47-23";
 const EMAIL_METRO = "sea@it37.ru";
 ---
 
@@ -26,6 +28,9 @@ const EMAIL_METRO = "sea@it37.ru";
             <a href="#contact-block" class="btn">Заказать поверку</a>
         </div>
     </section>
+    
+    {/* !!! НОВЫЙ ВИДЖЕТ РАЗМЕЩЕН ЗДЕСЬ !!! */}
+    <MetrologiaViz />
 
     <section class="section" style="padding-top: 0;">
         <MetrologiaCards />

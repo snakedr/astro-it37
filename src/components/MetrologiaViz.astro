@@ -1,0 +1,90 @@
+---
+// Массив строк, имитирующих лог подключения
+const logLines = [
+    "Соединение с прибором на заданной скорости...",
+    "Проверка параметров прибора...",
+    "Чтение настроечных параметров...",
+    "Проверка наличия архивов....",
+    "Чтение архивов......",
+];
+// Имя прибора для заголовка
+const deviceName = "СПТ-961";
+---
+
+<div class="container metrologia-viz-block">
+    <div class="device-display-wrapper">
+        <div class="device-display-header">
+            Эмуляция считывания данных | {deviceName}
+        </div>
+        <div class="device-display-screen">
+            <pre class="log-output">
+                {logLines.map(line => 
+                    // Используем padEnd для имитации выравнивания по правому краю
+                    <p class="log-line">{line.padEnd(50, ' ')} |</p>
+                )}
+                <p class="log-timer">
+                    <span> Здесь может таймер </span><span class="timer-value">00:00:001</span><span> начиная с миллисекунд </span> |
+                </p>
+            </pre>
+            <div class="screen-footer">_________________________________________________________</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .metrologia-viz-block {
+        padding: 80px 0;
+        text-align: center;
+    }
+    .device-display-wrapper {
+        max-width: 700px; /* Ограничиваем ширину дисплея */
+        margin: 0 auto;
+        border: 2px solid var(--error); /* Рамка в цвет акцента Метрологии */
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 20px var(--error-dim);
+    }
+    .device-display-header {
+        background: var(--error);
+        color: var(--text-inverted);
+        padding: 8px 15px;
+        font-size: 14px;
+        text-align: left;
+        font-weight: 700;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .device-display-screen {
+        background: var(--bg-deep); /* Темный фон */
+        color: #1aff00; /* Классический зеленый цвет консоли */
+        padding: 20px;
+        text-align: left;
+        font-family: 'Consolas', 'Courier New', monospace; /* Моноширинный шрифт */
+        font-size: 14px;
+        line-height: 1.5;
+        border-top: 1px solid var(--border);
+    }
+    .log-output {
+        margin: 0;
+        padding: 0;
+    }
+    .log-line, .log-timer {
+        margin: 0;
+        padding: 0;
+        white-space: pre; /* Сохраняет пробелы для выравнивания */
+    }
+    .log-timer {
+        color: var(--error); /* Выделяем текст вокруг таймера */
+        font-weight: bold;
+    }
+    .timer-value {
+        color: #1aff00; /* Сам таймер зеленым */
+        font-weight: bold;
+    }
+    .screen-footer {
+        color: var(--error);
+        text-align: left;
+        margin-top: 10px;
+        white-space: pre;
+        font-family: 'Consolas', 'Courier New', monospace;
+    }
+</style>
