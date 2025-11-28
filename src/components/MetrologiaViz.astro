@@ -1,13 +1,4 @@
 ---
-// Массив строк, имитирующих лог подключения
-const logLines = [
-    "Соединение с прибором на заданной скорости...",
-    "Проверка параметров прибора...",
-    "Чтение настроечных параметров...",
-    "Проверка наличия архивов....",
-    "Чтение архивов......",
-];
-// Имя прибора для заголовка
 const deviceName = "СПТ-961";
 ---
 
@@ -17,74 +8,174 @@ const deviceName = "СПТ-961";
             Эмуляция считывания данных | {deviceName}
         </div>
         <div class="device-display-screen">
-            <pre class="log-output">
-                {logLines.map(line => 
-                    // Используем padEnd для имитации выравнивания по правому краю
-                    <p class="log-line">{line.padEnd(50, ' ')} |</p>
-                )}
-                <p class="log-timer">
-                    <span> Здесь может таймер </span><span class="timer-value">00:00:001</span><span> начиная с миллисекунд </span> |
-                </p>
-            </pre>
-            <div class="screen-footer">_________________________________________________________</div>
+            <div id="log-container" class="log-output"></div>
+            
+            <div class="screen-footer">
+                <div class="loading-bar"></div>
+                <div class="timer-container">
+                    <span class="timer-label">ВРЕМЯ СЕАНСА:</span>
+                    <span id="session-timer">00:00:000</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<script>
+    // Скрипт выполняется на клиенте
+    const messages = [
+        "Соединение с прибором на заданной скорости...",
+        "Проверка параметров прибора...",
+        "Чтение настроечных параметров...",
+        "Проверка наличия архивов...",
+        "Чтение суточного архива (ОК)...",
+        "Чтение часового архива (ОК)...",
+        "Проверка контрольной суммы...",
+        "Данные успешно считаны."
+    ];
+
+    const logContainer = document.getElementById('log-container');
+    const timerElement = document.getElementById('session-timer');
+    let startTime;
+    let timerInterval;
+
+    // Функция форматирования времени
+    function formatTime(elapsed) {
+        const ms = Math.floor(elapsed % 1000).toString().padStart(3, '0');
+        const s = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
+        const m = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
+        return `${m}:${s}:${ms}`;
+    }
+
+    // Запуск таймера
+    function startTimer() {
+        startTime = Date.now();
+        timerInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            if(timerElement) timerElement.innerText = formatTime(elapsed);
+        }, 30); // Обновление каждые 30мс
+    }
+
+    // Функция паузы (для имитации работы)
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Основной цикл анимации
+    async function runSimulation() {
+        while (true) { // Бесконечный цикл
+            if(logContainer) logContainer.innerHTML = ''; // Очистка экрана
+            
+            // Проход по всем сообщениям
+            for (const msg of messages) {
+                if (!logContainer) break;
+                
+                const p = document.createElement('p');
+                p.className = 'log-line';
+                p.textContent = '> ' + msg;
+                logContainer.appendChild(p);
+                
+                // Случайная задержка между строками (от 300мс до 1200мс) имитирует реальную работу
+                await delay(300 + Math.random() * 900);
+            }
+
+            // Пауза перед перезапуском
+            await delay(2000);
+        }
+    }
+
+    // Запускаем при загрузке
+    startTimer();
+    runSimulation();
+</script>
+
 <style>
     .metrologia-viz-block {
-        padding: 80px 0;
+        padding: 60px 0;
         text-align: center;
     }
     .device-display-wrapper {
-        max-width: 700px; /* Ограничиваем ширину дисплея */
+        max-width: 700px;
         margin: 0 auto;
-        border: 2px solid var(--error); /* Рамка в цвет акцента Метрологии */
-        border-radius: 5px;
+        border: 1px solid var(--error);
+        border-radius: 4px;
         overflow: hidden;
-        box-shadow: 0 0 20px var(--error-dim);
+        background: #000;
+        box-shadow: 0 0 25px rgba(255, 59, 48, 0.15); /* Легкое свечение цветом ошибки */
     }
     .device-display-header {
         background: var(--error);
-        color: var(--text-inverted);
+        color: white;
         padding: 8px 15px;
-        font-size: 14px;
+        font-size: 13px;
         text-align: left;
         font-weight: 700;
         font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     .device-display-screen {
-        background: var(--bg-deep); /* Темный фон */
-        color: #1aff00; /* Классический зеленый цвет консоли */
+        background: #0a0a0a;
         padding: 20px;
         text-align: left;
-        font-family: 'Consolas', 'Courier New', monospace; /* Моноширинный шрифт */
-        font-size: 14px;
-        line-height: 1.5;
-        border-top: 1px solid var(--border);
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-family: 'Consolas', 'Courier New', monospace;
     }
     .log-output {
+        color: #1aff00; /* Ярко-зеленый терминальный цвет */
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    /* Глобальные стили для динамически создаваемых элементов (можно через :global в Astro) */
+    :global(.log-line) {
         margin: 0;
         padding: 0;
+        animation: fadeIn 0.3s ease-in;
     }
-    .log-line, .log-timer {
-        margin: 0;
-        padding: 0;
-        white-space: pre; /* Сохраняет пробелы для выравнивания */
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateX(-5px); }
+        to { opacity: 1; transform: translateX(0); }
     }
-    .log-timer {
-        color: var(--error); /* Выделяем текст вокруг таймера */
-        font-weight: bold;
-    }
-    .timer-value {
-        color: #1aff00; /* Сам таймер зеленым */
-        font-weight: bold;
-    }
+
     .screen-footer {
+        margin-top: 20px;
+        border-top: 1px solid #333;
+        padding-top: 10px;
+    }
+    
+    .loading-bar {
+        height: 2px;
+        background: var(--error);
+        width: 100%;
+        margin-bottom: 10px;
+        animation: scan 2s infinite linear;
+        opacity: 0.5;
+    }
+
+    @keyframes scan {
+        0% { width: 0%; opacity: 0; }
+        50% { opacity: 1; }
+        100% { width: 100%; opacity: 0; }
+    }
+
+    .timer-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
         color: var(--error);
-        text-align: left;
-        margin-top: 10px;
-        white-space: pre;
-        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 14px;
+    }
+    .timer-label {
+        opacity: 0.7;
+        font-size: 12px;
+    }
+    #session-timer {
+        font-weight: bold;
+        font-size: 16px;
+        font-variant-numeric: tabular-nums; /* Чтобы цифры не прыгали */
+        letter-spacing: 1px;
     }
 </style>
