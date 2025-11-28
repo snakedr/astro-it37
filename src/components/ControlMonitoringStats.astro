@@ -1,0 +1,74 @@
+---
+---
+<h2 style="margin-top: 80px;">Надежность и точность: Наши показатели</h2>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-number">24/7</span>
+        <p class="stat-label">Доступность мониторинга</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-number">99.9%</span>
+        <p class="stat-label">Точность прогнозирования</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-number">~30</span>
+        <p class="stat-label">Параметров под контролем AI</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-number">5 мин</span>
+        <p class="stat-label">Среднее время оповещения</p>
+    </div>
+</div>
+
+<style>
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+        padding-bottom: 80px; /* Добавим отступ снизу */
+        border-bottom: 1px solid var(--border);
+    }
+    .stat-card {
+        background: var(--bg-panel);
+        padding: 30px 20px;
+        border: 1px solid var(--border);
+        text-align: center;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+    .stat-card:hover {
+        border-color: var(--accent);
+    }
+    .stat-number {
+        display: block;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+    .stat-label {
+        font-size: 14px;
+        color: var(--text-gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    @media (max-width: 1200px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr); 
+        }
+    }
+
+    @media (max-width: 600px) {
+        .stats-grid {
+            grid-template-columns: 1fr; 
+        }
+        .stat-number {
+            font-size: 36px;
+        }
+    }
+</style>
