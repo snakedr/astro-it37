@@ -2,15 +2,17 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-import ContactBanner from '@/components/ContactBanner.astro'; // Используем повторно!
+import ContactBanner from '@/components/ContactBanner.astro'; 
 import MontazhProcess from '@/components/MontazhProcess.astro';
 import MontazhGuarantees from '@/components/MontazhGuarantees.astro';
+import MontazhDeadline from '@/components/MontazhDeadline.astro';
 
 // Переменная 'activeLink' нужна для подсветки активного пункта в Header
+const ACTIVE_LINK = "Монтаж";
 ---
 
-<MainLayout title="Монтаж и Пусконаладка | IT37" activeLink="Монтаж">
-  <Header activeLink="Монтаж" />
+<MainLayout title="Монтаж и Пусконаладка | IT37" activeLink={ACTIVE_LINK}>
+  <Header activeLink={ACTIVE_LINK} />
  
   <section class="hero-page">
     <div class="container">
@@ -25,13 +27,16 @@ import MontazhGuarantees from '@/components/MontazhGuarantees.astro';
   <section class="section" style="padding-top: 0;">
     <MontazhProcess />
     <MontazhGuarantees />
+    <MontazhDeadline />
   </section>
 
+  {/* !!! ИСПРАВЛЕННЫЙ БЛОК CONTACT BANNER ДЛЯ ПРОЕКТНОГО ОТДЕЛА !!! */}
   <ContactBanner
-    title="Связаться с монтажным отделом"
-    phone="+7 (4932) 37-25-55 (доб. 101)"
-    email="snv@it37.ru"
-    buttonText="Обсудить сроки монтажа"
+    title="Связаться с проектным отделом"
+    phone="+7 (4932) 37-25-55 (доб. 104)"
+    email="proekt@it37.ru"
+    buttonText="Запросить проектную документацию"
+        id="contact-block"
   />
 
   <Footer />
