@@ -7,10 +7,12 @@ import AIDashboard from '@/components/AIDashboard.astro';
 import ControlFeatures from '@/components/ControlFeatures.astro';
 
 // Переменная 'activeLink' нужна для подсветки активного пункта в Header
+const ACTIVE_LINK = "Диспетчеризация";
 ---
 
-<MainLayout title="Диспетчеризация | IT37" activeLink="Диспетчеризация">
-    <Header activeLink="Диспетчеризация" />
+<MainLayout title="Диспетчеризация | IT37" activeLink={ACTIVE_LINK}>
+
+    <Header activeLink={ACTIVE_LINK} />
     
     <section class="hero-page">
         <div class="container">
@@ -23,8 +25,17 @@ import ControlFeatures from '@/components/ControlFeatures.astro';
     </section>
 
     <section class="section" style="padding-top: 0;">
-        <AIDashboard />
-        <ControlFeatures />
+        {/* ИСПРАВЛЕНИЕ: Оборачиваем компоненты в div class="container" для ограничения ширины */}
+        {/* Дашборд */}
+        <div class="container">
+            <AIDashboard />
+        </div>
+        
+        {/* Преимущества */}
+        <div class="container">
+            <ControlFeatures />
+        </div>
+        {/* /КОНЕЦ ИСПРАВЛЕНИЯ */}
     </section>
 
     <ContactBanner 
@@ -35,4 +46,5 @@ import ControlFeatures from '@/components/ControlFeatures.astro';
     />
 
     <Footer />
+
 </MainLayout>
