@@ -1,15 +1,162 @@
 ---
 ---
 <footer>
-    <div class="container nav-flex">
-        <div>
-            <div class="logo" style="font-size: 18px;">IT<span>37</span></div>
-            <div style="margin-top: 10px;">Группа компаний</div>
+    <div class="container footer-grid">
+        <div class="footer-logo-section">
+            <div class="logo">IT<span>37</span></div>
+            <p class="copy">
+                &copy; {new Date().getFullYear()} IT37. <br> 
+                IT-решения для энергетики.
+            </p>
+            <div class="social-icons">
+                <a href="#"><img src="/icons/telegram.svg" alt="Telegram"></a>
+                <a href="#"><img src="/icons/vk.svg" alt="VK"></a>
+            </div>
         </div>
-        <div style="text-align: right;">
-            <p>г. Иваново</p>
-            <p style="color: white; margin-top: 5px;">+7 (4932) 37-25-55</p>
-            <p style="margin-top:5px;">info@it37.ru</p>
+
+        <div class="footer-links">
+            <h4>Основные разделы</h4>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/design">Проектирование</a></li>
+                <li><a href="/montazh">Монтаж</a></li>
+                <li><a href="/control">Диспетчеризация</a></li>
+            </ul>
         </div>
+        
+        <div class="footer-links">
+            <h4>Специализация</h4>
+            <ul>
+                <li><a href="/metrologia">Метрология</a></li>
+                <li><a href="/maintenance">Обслуживание</a></li>
+                <li><a href="/contacts">Контакты</a></li>
+                <li><a href="/sitemap">Карта сайта</a></li> 
+            </ul>
+        </div>
+        
+    </div>
+    
+    <div class="container footer-bottom">
+        <p>Разработка: <span>IT37 Web Team</span></p>
     </div>
 </footer>
+
+<style>
+    footer {
+        background: var(--bg-panel);
+        border-top: 1px solid var(--border);
+        padding-top: 50px;
+        color: var(--text-gray);
+        font-size: 14px;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr repeat(2, 1fr); /* 3 колонки: Лого, Ссылки, Ссылки */
+        gap: 40px;
+        padding-bottom: 50px;
+    }
+
+    .footer-logo-section {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .logo {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 15px;
+        line-height: 1;
+    }
+    .logo span {
+        color: var(--accent);
+    }
+
+    .copy {
+        margin-bottom: 20px;
+    }
+
+    .footer-links h4 {
+        color: var(--accent);
+        font-family: 'Orbitron', sans-serif;
+        font-size: 16px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 8px;
+    }
+    
+    .footer-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+        color: var(--accent);
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    .social-icons img {
+        width: 24px;
+        height: 24px;
+        filter: grayscale(100%) brightness(1.5);
+        transition: filter 0.3s;
+    }
+    .social-icons a:hover img {
+        filter: grayscale(0%) brightness(1);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid var(--border);
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 30px;
+        font-size: 13px;
+        color: var(--text-gray);
+    }
+    .footer-bottom span {
+        color: var(--accent);
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1fr 1fr; /* На планшетах 2 колонки */
+        }
+        .footer-logo-section {
+            grid-column: span 2; /* Логотип на всю ширину */
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .footer-grid {
+            grid-template-columns: 1fr; /* На мобильных 1 колонка */
+        }
+        .footer-logo-section {
+            grid-column: span 1;
+            text-align: center;
+            align-items: center;
+        }
+        .footer-links {
+            text-align: center;
+        }
+    }
+</style>
