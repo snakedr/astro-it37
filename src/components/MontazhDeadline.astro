@@ -1,0 +1,78 @@
+---
+---
+<div class="container deadline-block">
+    <div class="deadline-card">
+        <span class="deadline-number">14</span>
+        <span class="deadline-label">рабочих дней</span>
+        <h2>Средний срок <span style="color: var(--accent);">сдачи узла</span> в эксплуатацию</h2>
+        <p>
+            Благодаря собственным бригадам и отлаженной логистике, мы гарантируем, что ваш узел учета будет готов к сдаче в максимально сжатые сроки.
+        </p>
+        <a href="/contacts" class="btn primary">Обсудить ваш проект</a>
+    </div>
+</div>
+
+<style>
+    .deadline-block {
+        padding: 80px 0;
+        text-align: center;
+    }
+    .deadline-card {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 50px 40px;
+        background: var(--bg-panel);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 30px var(--accent-dim);
+    }
+    .deadline-number {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 100px;
+        font-weight: 900;
+        color: var(--accent);
+        line-height: 1;
+        display: block;
+        text-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+        margin-bottom: 10px;
+    }
+    .deadline-label {
+        font-size: 18px;
+        color: var(--text-gray);
+        display: block;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .deadline-card h2 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    .deadline-card p {
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+        color: var(--text-gray);
+    }
+
+    @media (max-width: 768px) {
+        .deadline-number {
+            font-size: 80px;
+        }
+        .deadline-card h2 {
+            font-size: 26px;
+        }
+    }
+    @media (max-width: 500px) {
+        .deadline-card {
+            padding: 30px 20px;
+        }
+        .deadline-number {
+            font-size: 60px;
+        }
+        .deadline-card h2 {
+            font-size: 20px;
+        }
+    }
+</style>
