@@ -1,47 +1,65 @@
 ---
 // 1. Импорт всех необходимых компонентов
 import MainLayout from '@/layouts/MainLayout.astro';
-import ContactBanner from '@/components/ContactBanner.astro'; 
+// !!! ИСПРАВЛЕНИЕ 1: Импортируем Header и Footer (как в montazh.astro)
+import Header from '@/components/Header.astro'; 
+import Footer from '@/components/Footer.astro'; 
+// !!! ИСПРАВЛЕНИЕ 2: Меняем ContactBanner на ConstrainedContactBanner
+import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
+
 import DesignAdvantages from '@/components/DesignAdvantages.astro';
 import DesignProcess from '@/components/DesignProcess.astro';
 import DesignVizBlock from '@/components/DesignVizBlock.astro';
-// Header и Footer НЕ ИМПОРТИРУЕМ, они должны быть в MainLayout
 
-// 2. Указываем активную ссылку для навигации
+// 2. Указываем активную ссылку и контакты
+const ACTIVE_LINK = "Проектирование"; // Для корректного выделения в меню
+const PHONE_PROEKT = "+7 (4932) 37-25-55 (доб. 104)";
+const EMAIL_PROEKT = "proekt@it37.ru";
 ---
 
-<MainLayout title="Проектирование и Аудит | IT37" activeLink="design">
-    
-    <section class="hero-page">
-        <div class="container">
-            <h1 style="color:var(--accent);">Проектирование и Аудит</h1>
-            <p>
-                Разработка документации для узлов учета тепловой энергии, воды и газа.
-                **AI-моделирование** для оптимизации расчетов и гарантия успешного согласования проекта в РСО.
-            </p>
-            <a href="#contact-block" class="btn">Запросить аудит документации</a>
-        </div>
-    </section>
+<MainLayout title="Проектирование и Аудит | IT37" activeLink={ACTIVE_LINK}>
+  {/* !!! ИСПРАВЛЕНИЕ 3: Добавляем Header !!! */}
+  <Header activeLink={ACTIVE_LINK} />
+ 
+  <section class="hero-page">
+    <div class="container">
+      <h1 style="color:var(--accent);">Проектирование и Аудит</h1>
+      <p>
+        Разработка документации для узлов учета тепловой энергии, воды и газа.
+        **AI-моделирование** для оптимизации расчетов и гарантия успешного согласования проекта в РСО.
+      </p>
+      <a href="#contact-block" class="btn">Запросить аудит документации</a>
+    </div>
+  </section>
 
-    <section class="section" style="padding-top: 0;">
-        <div class="container">
-            
-            <DesignVizBlock />
-            
-            <h2 style="margin-top: 80px;">Наши ключевые преимущества</h2>
-            <DesignAdvantages /> 
-            
-            <h2 style="margin-top: 80px;">Этапы работ</h2>
-            <DesignProcess />
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
      
-            <div class="info-card" style="margin-top: 50px;">
-                <h3 style="color:var(--text-main);">Аудит существующей документации</h3>
-                <p style="color:var(--text-gray); margin-top:10px;">Проведем экспертизу имеющегося проекта на соответствие нормам и требованиям РСО, выявим потенциальные проблемы и предложим решения для оптимизации. Это позволит сэкономить время и средства на этапе монтажа.</p>
-            </div>
+      <DesignVizBlock />
+     
+      <h2 style="margin-top: 80px;">Наши ключевые преимущества</h2>
+      <DesignAdvantages />
+     
+      <h2 style="margin-top: 80px;">Этапы работ</h2>
+      <DesignProcess />
+  
+      <div class="info-card" style="margin-top: 50px;">
+        <h3 style="color:var(--text-main);">Аудит существующей документации</h3>
+        <p style="color:var(--text-gray); margin-top:10px;">Проведем экспертизу имеющегося проекта на соответствие нормам и требованиям РСО, выявим потенциальные проблемы и предложим решения для оптимизации. Это позволит сэкономить время и средства на этапе монтажа.</p>
+      </div>
 
-        </div>
-    </section>
+    </div>
+  </section>
 
-    <ContactBanner />
+  {/* !!! ИСПРАВЛЕНИЕ 4: Используем ConstrainedContactBanner и передаем контакты Проектного отдела !!! */}
+  <ConstrainedContactBanner 
+        title="Связаться с проектным отделом"
+        phone={PHONE_PROEKT}
+        email={EMAIL_PROEKT}
+        buttonText="Получить коммерческое предложение"
+        id="contact-block"
+    />
 
+    {/* !!! ИСПРАВЛЕНИЕ 5: Добавляем Footer !!! */}
+    <Footer />
 </MainLayout>
