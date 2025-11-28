@@ -4,10 +4,11 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
 import ContactBanner from '@/components/ContactBanner.astro'; 
 import MontazhProcess from '@/components/MontazhProcess.astro';
-import MontazhGuarantees from '@/components/MontazhGuarantees.astro';
-import MontazhDeadline from '@/components/MontazhDeadline.astro';
+import MontazhDeadline from '@/components/MontazhDeadline.astro'; // Оставляем, так как он завершает преимущества
 
-// Переменная 'activeLink' нужна для подсветки активного пункта в Header
+// Удалите: import MontazhGuarantees from '@/components/MontazhGuarantees.astro'; 
+// Удалите: import MontazhLegalGuarantee from '@/components/MontazhLegalGuarantee.astro';
+
 const ACTIVE_LINK = "Монтаж";
 ---
 
@@ -26,16 +27,17 @@ const ACTIVE_LINK = "Монтаж";
 
   <section class="section" style="padding-top: 0;">
     <MontazhProcess />
-    <MontazhGuarantees />
-    <MontazhDeadline />
+    {/* Если вы считаете, что MontazhDeadline нужен для завершения преимуществ, ОСТАВЬТЕ ЕГО: */}
+    <MontazhDeadline /> 
+        {/* ИЛИ УДАЛИТЕ, если он вам не нужен */}
   </section>
 
-  {/* !!! ИСПРАВЛЕННЫЙ БЛОК CONTACT BANNER ДЛЯ ПРОЕКТНОГО ОТДЕЛА !!! */}
+  {/* !!! КОНТАКТЫ ДЛЯ МОНТАЖНОГО ОТДЕЛА (Исправлено) !!! */}
   <ContactBanner
-    title="Связаться с проектным отделом"
-    phone="+7 (4932) 37-25-55 (доб. 104)"
-    email="proekt@it37.ru"
-    buttonText="Запросить проектную документацию"
+    title="Связаться с монтажным отделом"
+    phone="+7 (4932) 37-25-55 (доб. 101)"
+    email="snv@it37.ru"
+    buttonText="Обсудить сроки монтажа"
         id="contact-block"
   />
 
