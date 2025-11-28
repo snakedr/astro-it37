@@ -1,8 +1,59 @@
 ---
 ---
-<div class="container">
-    <div class="info-card" style="margin-top: 50px;">
-        <h3 style="color:var(--text-main);">Проактивное Обслуживание (с Диспетчеризацией)</h3>
-        <p style="color:var(--text-gray); margin-top:10px;">Если ваш узел подключен к нашей системе **IT37 Control**, обслуживание переходит на проактивный уровень. Мы получаем сигналы о сбоях **до того**, как они станут критическими, что позволяет устранять проблемы удаленно или планировать визит инженера заранее, минуя аварийные простои.</p>
+<div class="container proactive-info">
+    <div class="info-content">
+        <h2>Проактивное Обслуживание (с Диспетчеризацией)</h2>
+        <p>
+            Если ваш узел подключен к нашей системе **IT37 Control**, обслуживание переходит на проактивный уровень. Мы получаем сигналы о сбоях **до того**, как они станут критическими, что позволяет устранять проблемы удаленно или планировать визит инженера заранее, минуя аварийные простои.
+        </p>
+        <a href="/dispetherization" class="btn primary">Узнать о системе IT37 Control</a>
+    </div>
+
+    <div class="info-visual">
+        {/* Placeholder для визуального элемента: графика, дашборда или иконки */}
+        <div class="visual-placeholder">
+            
+        </div>
     </div>
 </div>
+
+<style>
+    .proactive-info {
+        padding-top: 60px;
+        padding-bottom: 80px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+    .info-content h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    .info-content p {
+        color: var(--text-gray);
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+    .visual-placeholder {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        height: 300px; /* Фиксированная высота для макета */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-gray);
+        font-style: italic;
+    }
+
+    @media (max-width: 1000px) {
+        .proactive-info {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .info-content h2 {
+            font-size: 28px;
+        }
+    }
+</style>

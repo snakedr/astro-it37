@@ -1,16 +1,15 @@
 ---
 ---
-<div class="container">
+<div class="container maintenance-cards-section">
     <h2>Наши пакеты обслуживания</h2>
-    <p style="color:var(--text-gray); max-width: 800px; margin-bottom: 20px;">
+    <p class="subtitle">
         Мы предлагаем комплексное абонентское обслуживание, включающее как плановые работы, так и экстренное реагирование.
     </p>
-    
+
     <div class="maintenance-grid">
-        
-        <div class="maint-card">
-            <h3>Абонентское Техническое Обслуживание</h3>
-            <p style="color:var(--text-gray);">
+        <div class="card maintenance-card-package">
+            <h3 class="card-title">Абонентское техническое обслуживание</h3>
+            <p class="card-description">
                 Пакет для юридических лиц, гарантирующий стабильную и легитимную работу вашего узла учета в течение всего года.
             </p>
             <ul>
@@ -22,9 +21,9 @@
             </ul>
         </div>
 
-        <div class="maint-card repair">
-            <h3>Ремонт и Восстановление УУТЭ</h3>
-            <p style="color:var(--text-gray);">
+        <div class="card maintenance-card-package">
+            <h3 class="card-title">Ремонт и восстановление УУТЭ</h3>
+            <p class="card-description">
                 Срочные и плановые работы по ремонту, замене и восстановлению работоспособности приборов учета.
             </p>
             <ul>
@@ -37,3 +36,70 @@
         </div>
     </div>
 </div>
+
+<style>
+    .maintenance-cards-section {
+        padding-bottom: 60px;
+        text-align: center;
+    }
+    .maintenance-cards-section h2 {
+        margin-bottom: 10px;
+        font-size: 36px;
+    }
+    .subtitle {
+        color: var(--text-gray);
+        max-width: 700px;
+        margin: 0 auto 50px auto;
+    }
+    .maintenance-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        text-align: left;
+    }
+    .maintenance-card-package {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        padding: 30px;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+    .maintenance-card-package:hover {
+        border-color: var(--success);
+    }
+    .card-title {
+        color: var(--success);
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .card-description {
+        color: var(--text-gray);
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+    .maintenance-card-package ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .maintenance-card-package ul li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+        color: var(--text-main);
+        font-size: 15px;
+    }
+    .maintenance-card-package ul li::before {
+        content: '✓';
+        color: var(--success);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+    
+    @media (max-width: 900px) {
+        .maintenance-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

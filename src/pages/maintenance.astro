@@ -2,19 +2,17 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-// Удаляем старый импорт ContactBanner
-// import ContactBanner from '@/components/ContactBanner.astro'; 
-// Используем новый компонент для ограничения ширины
+// Используем компонент для ограничения ширины
 import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
 
 import MaintenanceCards from '@/components/MaintenanceCards.astro';
 import ProactiveMaintenanceInfo from '@/components/ProactiveMaintenanceInfo.astro';
 
-// activeLink используется для подсветки активного пункта в Header
+const ACTIVE_LINK = "Обслуживание";
 ---
 
-<MainLayout title="Обслуживание и Ремонт | IT37" activeLink="Обслуживание">
-  <Header activeLink="Обслуживание" />
+<MainLayout title="Обслуживание и Ремонт | IT37" activeLink={ACTIVE_LINK}>
+  <Header activeLink={ACTIVE_LINK} />
  
   <section class="hero-page">
     <div class="container">
@@ -31,11 +29,11 @@ import ProactiveMaintenanceInfo from '@/components/ProactiveMaintenanceInfo.astr
     <ProactiveMaintenanceInfo />
   </section>
 
-  {/* !!! ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ + Ограниченная ширина !!! */}
+  {/* !!! ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ (ИСПРАВЛЕНО) !!! */}
   <ConstrainedContactBanner
     title="Связаться с отделом Обслуживания"
-    phone="+7 (4932) 37-25-55 (доб. 101)"
-    email="snv@it37.ru"
+    phone="+7 (4932) 37-25-55 (доб. 103)"
+    email="service@it37.ru"
     buttonText="Оставить заявку на ремонт или обслуживание"
         id="contact-block"
   />
