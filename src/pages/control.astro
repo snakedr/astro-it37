@@ -2,11 +2,14 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-import ContactBanner from '@/components/ContactBanner.astro'; // Переиспользуемый
 import AIDashboard from '@/components/AIDashboard.astro';
 import ControlFeatures from '@/components/ControlFeatures.astro';
+import ControlSavingsBlock from '@/components/ControlSavingsBlock.astro';
+import ControlMonitoringStats from '@/components/ControlMonitoringStats.astro';
+// !!! НОВЫЙ ИМПОРТ !!!
+import ControlContactCard from '@/components/ControlContactCard.astro';
 
-// Переменная 'activeLink' нужна для подсветки активного пункта в Header
+
 const ACTIVE_LINK = "Диспетчеризация";
 ---
 
@@ -25,26 +28,30 @@ const ACTIVE_LINK = "Диспетчеризация";
     </section>
 
     <section class="section" style="padding-top: 0;">
-        {/* ИСПРАВЛЕНИЕ: Оборачиваем компоненты в div class="container" для ограничения ширины */}
-        {/* Дашборд */}
         <div class="container">
             <AIDashboard />
         </div>
         
-        {/* Преимущества */}
         <div class="container">
             <ControlFeatures />
         </div>
-        {/* /КОНЕЦ ИСПРАВЛЕНИЯ */}
+        
+        <div class="container">
+            <ControlSavingsBlock />
+        </div>
+
+        <div class="container">
+            <ControlMonitoringStats />
+        </div>
+        
+        {/* !!! ТРЕТИЙ (ФИНАЛЬНЫЙ) БЛОК КОНТАКТОВ !!! */}
+        <div class="container">
+            <ControlContactCard /> 
+        </div>
+        
     </section>
 
-    <ContactBanner 
-        title="Запрос на подключение к Диспетчеризации"
-        phone="+7 (4932) 37-25-55 (доб. 100)"
-        email="np@it37.ru"
-        buttonText="Получить демо-доступ"
-    />
-
+    {/* ContactBanner УДАЛЕН, так как его заменил ControlContactCard */}
     <Footer />
 
 </MainLayout>
