@@ -2,12 +2,13 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-import ContactBanner from '@/components/ContactBanner.astro'; 
-import MontazhProcess from '@/components/MontazhProcess.astro';
-import MontazhDeadline from '@/components/MontazhDeadline.astro'; // Оставляем, так как он завершает преимущества
+// !!! УДАЛЯЕМ ContactBanner и импортируем новый ограниченный блок
+// import ContactBanner from '@/components/ContactBanner.astro'; 
+import MontazhContactBanner from '@/components/MontazhContactBanner.astro'; 
 
-// Удалите: import MontazhGuarantees from '@/components/MontazhGuarantees.astro'; 
-// Удалите: import MontazhLegalGuarantee from '@/components/MontazhLegalGuarantee.astro';
+import MontazhProcess from '@/components/MontazhProcess.astro';
+import MontazhDeadline from '@/components/MontazhDeadline.astro'; 
+import MontazhGuarantees from '@/components/MontazhGuarantees.astro'; 
 
 const ACTIVE_LINK = "Монтаж";
 ---
@@ -27,18 +28,17 @@ const ACTIVE_LINK = "Монтаж";
 
   <section class="section" style="padding-top: 0;">
     <MontazhProcess />
-    {/* Если вы считаете, что MontazhDeadline нужен для завершения преимуществ, ОСТАВЬТЕ ЕГО: */}
+    <MontazhGuarantees /> 
     <MontazhDeadline /> 
-        {/* ИЛИ УДАЛИТЕ, если он вам не нужен */}
   </section>
 
-  {/* !!! КОНТАКТЫ ДЛЯ МОНТАЖНОГО ОТДЕЛА (Исправлено) !!! */}
-  <ContactBanner
+  {/* !!! ФИНАЛЬНЫЙ БЛОК: МОНТАЖНЫЙ ОТДЕЛ + ОГРАНИЧЕННАЯ ШИРИНА !!! */}
+  <MontazhContactBanner 
     title="Связаться с монтажным отделом"
     phone="+7 (4932) 37-25-55 (доб. 101)"
     email="snv@it37.ru"
     buttonText="Обсудить сроки монтажа"
-        id="contact-block"
+    id="contact-block"
   />
 
   <Footer />

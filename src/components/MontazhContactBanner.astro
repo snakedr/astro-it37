@@ -1,0 +1,24 @@
+---
+import ContactBanner from '@/components/ContactBanner.astro';
+
+// Получаем пропсы для передачи в ContactBanner
+const { title, phone, email, buttonText, id } = Astro.props;
+---
+<div class="montazh-contact-wrapper">
+    <ContactBanner 
+        title={title}
+        phone={phone}
+        email={email}
+        buttonText={buttonText}
+        id={id}
+    />
+</div>
+
+<style>
+    /* Эта обертка ограничивает ширину и центрирует блок */
+    .montazh-contact-wrapper {
+        max-width: 900px; /* Ограничиваем до разумной ширины карточки */
+        margin: 0 auto 80px auto; /* Центрируем и добавляем отступ снизу */
+        padding: 0 15px; /* Боковые отступы для мобильных */
+    }
+</style>
