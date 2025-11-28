@@ -1,67 +1,69 @@
 ---
 ---
-<div class="container">
-    <h2 style="margin-top: 80px;">Ключевые возможности системы</h2>
-    <div class="process-grid">
-        
-        <div class="step-card">
-            <div class="step-num">01</div>
-            <h3>Автоматический Сбор Данных</h3>
-            <p style="color:var(--text-gray);">
-                Удаленный сбор показаний с приборов учета по GPRS/GSM или Ethernet. Автоматическая передача данных в РСО и интеграция с любой внутренней ERP/биллинговой системой.
-            </p>
-        </div>
+<h2 style="margin-top: 80px;">Ключевые преимущества AI-Диспетчеризации</h2>
 
-        <div class="step-card">
-            <div class="step-num">02</div>
-            <h3>Предиктивный Анализ и Аномалии</h3>
-            <p style="color:var(--text-gray);">
-                Алгоритмы машинного обучения **непрерывно сканируют** потоки данных для выявления аномалий (утечки, некорректная работа приборов, превышение норм) до того, как они станут аварией.
-            </p>
-        </div>
+<div class="features-grid">
+    
+    <div class="feature-card">
+        <div class="icon">📈</div>
+        <h3>Прогнозирование Аномалий</h3>
+        <p>
+            Алгоритмы машинного обучения анализируют исторические данные и выявляют паттерны, предсказывая потенциальные сбои в системе до того, как они приведут к аварии или перерасходу.
+        </p>
+    </div>
 
-        <div class="step-card">
-            <div class="step-num">03</div>
-            <h3>Единый Центр Управления</h3>
-            <p style="color:var(--text-gray);">
-                Все объекты и все типы ресурсов (тепло, вода, газ, электричество) объединены в один интуитивно понятный интерфейс. Доступ 24/7 с любого устройства (мобильная адаптивность).
-            </p>
-        </div>
+    <div class="feature-card">
+        <div class="icon">💡</div>
+        <h3>Энергоэффективность</h3>
+        <p>
+            Автоматическая корректировка режимов работы оборудования в зависимости от погодных условий и фактического потребления, что гарантирует оптимальное использование энергоресурсов и снижение затрат.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">🛡️</div>
+        <h3>Снижение Рисков</h3>
+        <p>
+            Круглосуточный мониторинг и мгновенные оповещения о критических событиях позволяют сократить время реакции персонала с часов до минут и избежать штрафов от РСО.
+        </p>
     </div>
 </div>
 
 <style>
-    /* !!! ИСПРАВЛЕНИЕ: ДОБАВЛЕНЫ КРИТИЧЕСКИЕ СТИЛИ ДЛЯ КАРТОЧЕК !!! */
-    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-    .step-card { 
-        background: var(--bg-panel); 
-        padding: 30px; 
-        border-left: 3px solid var(--accent); 
-        position: relative; 
-        transition: transform 0.3s, border-left-color 0.3s;
-    }
-    .step-card:hover {
-        transform: translateY(-5px);
-        border-left-color: white;
-    }
-    .step-card h3 { 
-        color: var(--accent); 
-        font-size: 18px; 
-        margin-bottom: 10px; 
-        font-family: 'Orbitron', sans-serif; /* Добавляем Orbitron для заголовка, как в DesignProcess */
-        text-transform: uppercase;
-    }
-    .step-num { 
-        position: absolute; 
-        top: 10px; 
-        right: 20px; 
-        font-family: 'Orbitron'; 
-        font-size: 40px; 
-        color: var(--border); 
-        opacity: 0.5; 
+    .features-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Адаптивная сетка */
+        gap: 30px; 
+        margin-top: 50px; 
     }
 
-    @media (max-width: 900px) {
-        .process-grid { grid-template-columns: 1fr; }
+    .feature-card {
+        background: var(--bg-panel); /* Цвет фона из глобальных переменных */
+        padding: 40px 30px; 
+        border: 1px solid var(--border);
+        transition: border-color 0.3s, transform 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 5px;
+    }
+    .feature-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 242, 255, 0.1);
+    }
+    .icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+        line-height: 1;
+    }
+    .feature-card h3 {
+        color: var(--accent);
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .feature-card p {
+        color: var(--text-gray);
     }
 </style>
