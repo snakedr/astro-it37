@@ -29,3 +29,39 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* !!! ИСПРАВЛЕНИЕ: ДОБАВЛЕНЫ КРИТИЧЕСКИЕ СТИЛИ ДЛЯ КАРТОЧЕК !!! */
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+    .step-card { 
+        background: var(--bg-panel); 
+        padding: 30px; 
+        border-left: 3px solid var(--accent); 
+        position: relative; 
+        transition: transform 0.3s, border-left-color 0.3s;
+    }
+    .step-card:hover {
+        transform: translateY(-5px);
+        border-left-color: white;
+    }
+    .step-card h3 { 
+        color: var(--accent); 
+        font-size: 18px; 
+        margin-bottom: 10px; 
+        font-family: 'Orbitron', sans-serif; /* Добавляем Orbitron для заголовка, как в DesignProcess */
+        text-transform: uppercase;
+    }
+    .step-num { 
+        position: absolute; 
+        top: 10px; 
+        right: 20px; 
+        font-family: 'Orbitron'; 
+        font-size: 40px; 
+        color: var(--border); 
+        opacity: 0.5; 
+    }
+
+    @media (max-width: 900px) {
+        .process-grid { grid-template-columns: 1fr; }
+    }
+</style>

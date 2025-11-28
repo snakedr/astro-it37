@@ -1,5 +1,4 @@
 ---
-// Фронтматтер пуст, так как компонент не принимает props
 ---
 <div class="container">
     <h2>Эффективность под контролем AI</h2>
@@ -18,7 +17,7 @@
             <span class="dashboard-live">LIVE DATA</span>
         </div>
         <div style="flex-grow: 1; position: relative;"> 
-            </div>
+        </div>
         <div class="dashboard-data">
             <span class="data-point">Без оптимизации</span>
             <span class="data-point" style="color: var(--success);">С системой IT37 Control</span>
@@ -26,16 +25,16 @@
     </div>
 </div>
 
-<script>
+<script client:load> 
     // --- ЛОГИКА ЭФФЕКТА МАТРИЦЫ ---
     document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('matrixCanvas');
-        if (!canvas) return; // Защита от отсутствия элемента
+        if (!canvas) return; 
 
         const context = canvas.getContext('2d');
         const dashboard = document.getElementById('dashboard-block');
         
-        // Функции установки и обновления размера Canvas
+        // ... (весь ваш существующий JavaScript-код остается здесь) ...
         const setCanvasSize = () => {
             if (dashboard) {
                 canvas.width = dashboard.clientWidth;
@@ -43,18 +42,14 @@
             }
         };
 
-        // Устанавливаем размер канваса при загрузке и изменении размера окна
         setCanvasSize();
         window.addEventListener('resize', setCanvasSize);
 
         const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ!@#$%^&*()_+-=~`<>,.?/|{}[]';
         const fontSize = 16; 
-        
-        // Пересчитываем столбцы при каждом изменении размера
         let columns = canvas.width / fontSize;
         let drops = [];
         
-        // Функция инициализации drops
         const initDrops = () => {
             columns = canvas.width / fontSize;
             drops = [];
@@ -63,9 +58,8 @@
             }
         };
 
-        // Пересчитываем drops при изменении размера
         window.addEventListener('resize', initDrops);
-        initDrops(); // Первоначальная инициализация
+        initDrops(); 
 
         const drawMatrix = () => {
             context.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
@@ -74,7 +68,6 @@
             context.fillStyle = '#00f2ff'; 
             context.font = `${fontSize}px monospace`;
 
-            // Убедимся, что drops соответствует текущему числу столбцов (на случай, если resize не успел)
             if (drops.length !== Math.floor(canvas.width / fontSize)) {
                 initDrops();
             }
@@ -90,7 +83,72 @@
             }
         };
 
-        // Запускаем анимацию
         setInterval(drawMatrix, 50); 
     });
 </script>
+
+<style>
+    /* !!! ИСПРАВЛЕНИЕ: ДОБАВЛЕНЫ КРИТИЧЕСКИЕ СТИЛИ ДЛЯ LAYOUT !!! */
+    .ai-dashboard {
+        background-color: #000000; 
+        border: 1px solid var(--accent);
+        padding: 30px;
+        margin-top: 80px;
+        position: relative;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        color: var(--accent);
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border);
+        z-index: 1; 
+        position: relative;
+    }
+    .dashboard-live {
+        border: 1px solid var(--accent);
+        padding: 5px 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .dashboard-data {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-top: 15px;
+        border-top: 1px solid var(--border);
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        z-index: 1; 
+        position: relative;
+    }
+    .data-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: white;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .data-optimized {
+        color: var(--success);
+    }
+    .matrix-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; 
+        z-index: 0; 
+        opacity: 0.4; 
+    }
+    .matrix-canvas {
+        display: block; 
+    }
+</style>
