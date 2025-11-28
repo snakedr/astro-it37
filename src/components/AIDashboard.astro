@@ -1,21 +1,43 @@
-<script client:load>
-    // --- ЛОГИКА ЭФФЕКТА МАТРИЦЫ ---
+---
+// Фронтматтер пуст, так как компонент не принимает props
+---
+<div class="container">
+    <h2>Эффективность под контролем AI</h2>
+    <p style="color:var(--text-gray); max-width: 800px; margin-bottom: 20px;">
+        Наш дашборд визуализирует работу узла учета. Система Poverka37 (или Ваше название) анализирует входящие потоки данных и прогнозирует отклонения, позволяя перейти от реактивного обслуживания к **предиктивному**.
+    </p>
     
-    // !!! КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ: ГАРАНТИРУЕМ, ЧТО HTML ГОТОВ !!!
-    document.addEventListener('DOMContentLoaded', () => {
+    <div id="dashboard-block" class="ai-dashboard">
+        <div class="matrix-container">
+            <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+        </div>
 
+        <div class="dashboard-header">
+            <span class="data-value">100%</span>
+            <span class="data-value data-optimized">-23%</span>
+            <span class="dashboard-live">LIVE DATA</span>
+        </div>
+        <div style="flex-grow: 1; position: relative;"> 
+        </div>
+        <div class="dashboard-data">
+            <span class="data-point">Без оптимизации</span>
+            <span class="data-point" style="color: var(--success);">С системой IT37 Control</span>
+        </div>
+    </div>
+</div>
+
+<script client:load>
+    // --- ЛОГИКА ЭФФЕКТА МАТРИЦЫ (ОРИГИНАЛЬНАЯ РАБОЧАЯ ВЕРСИЯ) ---
+    document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('matrixCanvas');
-        if (!canvas) return; // Проверка 1: Элемент должен быть найден
-        
+        if (!canvas) return; // Защита от отсутствия элемента
+
         const context = canvas.getContext('2d');
-        if (!context) return; // Проверка 2: Контекст рисования должен быть получен
+        if (!context) return; // Проверка контекста для надежности
 
         const dashboard = document.getElementById('dashboard-block');
-        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ!@#$%^&*()_+-=~`<>,.?/|{}[]';
-        const fontSize = 16; 
-        let drops = [];
         
-        // 1. Установка размера Canvas по родительскому блоку
+        // Функции установки и обновления размера Canvas
         const setCanvasSize = () => {
             if (dashboard) {
                 canvas.width = dashboard.clientWidth;
@@ -23,37 +45,45 @@
             }
         };
 
-        // 2. Инициализация столбцов (drops)
+        // Устанавливаем размер канваса при загрузке
+        setCanvasSize();
+        
+        const matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ!@#$%^&*()_+-=~`<>,.?/|{}[]';
+        const fontSize = 16; 
+        
+        let columns;
+        let drops = [];
+        
+        // Функция инициализации drops
         const initDrops = () => {
-            setCanvasSize(); 
-            const columns = Math.floor(canvas.width / fontSize);
+            setCanvasSize(); // Обновляем размер перед расчетом
+            columns = Math.floor(canvas.width / fontSize);
             drops = [];
             for (let i = 0; i < columns; i++) {
                 drops[i] = 1; 
             }
         };
 
-        // 3. Функция отрисовки
+        // Пересчитываем drops и размер при изменении размера окна
+        window.addEventListener('resize', initDrops);
+        initDrops(); // Первоначальная инициализация
+
         const drawMatrix = () => {
-            // Отрисовка с полупрозрачным фоном для эффекта "хвоста"
             context.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
             context.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Установка цвета и шрифта
+
             context.fillStyle = '#00f2ff'; 
             context.font = `${fontSize}px monospace`;
 
-            // Проверяем, не изменился ли размер
+            // Убедимся, что drops соответствует текущему числу столбцов
             if (drops.length !== Math.floor(canvas.width / fontSize)) {
-                initDrops(); 
+                initDrops();
             }
-            
-            // Отрисовка символов
+
             for (let i = 0; i < drops.length; i++) {
                 const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
                 context.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                // Сброс колонки, когда она достигает дна
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0; 
                 }
@@ -61,12 +91,74 @@
             }
         };
 
-        // Запускаем инициализацию и анимацию
-        initDrops();
+        // Запускаем анимацию
         setInterval(drawMatrix, 50); 
-        
-        // Обработка изменения размера окна
-        window.addEventListener('resize', initDrops);
-
-    }); // Конец DOMContentLoaded: Гарантирует запуск после HTML
+    });
 </script>
+
+<style>
+    /* !!! СТИЛИ, ОБЕСПЕЧИВАЮЩИЕ ВИДИМОСТЬ И РАЗМЕР БЛОКА !!! */
+    .ai-dashboard {
+        background-color: #000000; 
+        border: 1px solid var(--accent);
+        padding: 30px;
+        margin-top: 80px;
+        position: relative;
+        min-height: 400px; /* КЛЮЧ: ЗАДАЕТ МИНИМАЛЬНУЮ ВЫСОТУ БЛОКА */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        color: var(--accent);
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border);
+        z-index: 1; 
+        position: relative;
+    }
+    .dashboard-live {
+        border: 1px solid var(--accent);
+        padding: 5px 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .dashboard-data {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-top: 15px;
+        border-top: 1px solid var(--border);
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        z-index: 1; 
+        position: relative;
+    }
+    .data-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: white;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .data-optimized {
+        color: var(--success);
+    }
+    /* Контейнер матрицы должен полностью закрывать родительский блок */
+    .matrix-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; 
+        overflow: hidden; 
+        z-index: 0; 
+        opacity: 0.4; 
+    }
+    .matrix-canvas {
+        display: block; 
+    }
+</style>
