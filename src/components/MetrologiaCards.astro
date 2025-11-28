@@ -1,0 +1,103 @@
+---
+---
+<div class="container metrologia-cards-section">
+    <h2>Услуги метрологического центра</h2>
+    <p class="subtitle">
+        Мы берем на себя полный цикл работ: от демонтажа до регистрации результатов в ФГИС "Аршин".
+    </p>
+
+    <div class="cards-grid">
+        <div class="card metrologia-card">
+            <h3 class="card-title">Плановая и срочная поверка</h3>
+            <p class="card-description">
+                Организация поверочных работ для приборов с истекшим межповерочным интервалом (МПИ). Включает демонтаж, транспортировку, поверку и монтаж.
+            </p>
+            <ul>
+                <li>Теплосчетчики и расходомеры.</li>
+                <li>Датчики температуры и давления.</li>
+                <li>Водосчетчики и газовые приборы.</li>
+                <li>Сроки: от **3 до 10 рабочих дней**.</li>
+            </ul>
+        </div>
+
+        <div class="card metrologia-card">
+            <h3 class="card-title">Экспертиза и калибровка</h3>
+            <p class="card-description">
+                Проведение экспертизы для выявления причин неисправности и оказание услуг по калибровке, когда поверка не требуется или невозможна.
+            </p>
+            <ul>
+                <li>Техническая диагностика приборов.</li>
+                <li>Калибровка приборов (для промышленных объектов).</li>
+                <li>Выдача экспертного заключения для РСО или суда.</li>
+                <li>Оперативная замена неисправных компонентов.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .metrologia-cards-section {
+        padding-bottom: 60px;
+        text-align: center;
+    }
+    .metrologia-cards-section h2 {
+        margin-bottom: 10px;
+        font-size: 36px;
+    }
+    .subtitle {
+        color: var(--text-gray);
+        max-width: 700px;
+        margin: 0 auto 50px auto;
+    }
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        text-align: left;
+    }
+    .metrologia-card {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        padding: 30px;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+    .metrologia-card:hover {
+        border-color: var(--error); /* Используем цвет ошибки для акцента */
+    }
+    .card-title {
+        color: var(--error);
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .card-description {
+        color: var(--text-gray);
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+    .metrologia-card ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .metrologia-card ul li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+        color: var(--text-main);
+        font-size: 15px;
+    }
+    .metrologia-card ul li::before {
+        content: '•';
+        color: var(--error);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+    
+    @media (max-width: 900px) {
+        .cards-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

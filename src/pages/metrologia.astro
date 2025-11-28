@@ -2,36 +2,43 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro'; 
-import ContactBanner from '@/components/ContactBanner.astro'; 
-import MetrologiaServices from '@/components/MetrologiaServices.astro';
-import ArshinInfo from '@/components/ArshinInfo.astro';
+// Используем ConstrainedContactBanner для ограниченной ширины
+import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
+// Компоненты для контента (будут созданы ниже)
+import MetrologiaCards from '@/components/MetrologiaCards.astro';
+import MetrologiaProcess from '@/components/MetrologiaProcess.astro';
 
-// activeLink используется для подсветки активного пункта в Header
+const ACTIVE_LINK = "Метрология";
+const PHONE_METRO = "+7 (4932) 37-25-55 (доб. 105)";
+const EMAIL_METRO = "sea@it37.ru";
 ---
 
-<MainLayout title="Метрология и Поверка | IT37" activeLink="Метрология">
-    <Header activeLink="Метрология" />
-    
+<MainLayout title="Поверка и Метрология | IT37" activeLink={ACTIVE_LINK}>
+    <Header activeLink={ACTIVE_LINK} />
+ 
     <section class="hero-page">
         <div class="container">
-            <h1 style="color:var(--accent);">Метрология и Поверка</h1>
+            <h1 style="color:var(--error);">Поверка и Метрология</h1>
             <p>
-                Обеспечение точности и достоверности показаний приборов учета. **Аккредитованные** методы поверки и внесение данных во ФГИС "Аршин" для соответствия требованиям законодательства.
+                Организация и проведение поверочных работ в строгом соответствии с ФЗ №102. Работаем со всеми типами приборов учета тепла, воды и газа.
+                **Срочная поверка** с минимальным простоем оборудования.
             </p>
-            <a href="#contact-block" class="btn">Заказать поверку приборов</a>
+            <a href="#contact-block" class="btn">Заказать поверку</a>
         </div>
     </section>
 
     <section class="section" style="padding-top: 0;">
-        <MetrologiaServices />
-        <ArshinInfo />
+        <MetrologiaCards />
+        <MetrologiaProcess />
     </section>
 
-    <ContactBanner 
+    {/* Блок призыва к действию: Метрологический отдел */}
+    <ConstrainedContactBanner
         title="Связаться с метрологическим отделом"
-        phone="+7 (4932) 00-00-00 (доб. 103)"
-        email="metrology@it37.ru"
-        buttonText="Запросить коммерческое предложение"
+        phone={PHONE_METRO}
+        email={EMAIL_METRO}
+        buttonText="Запросить сроки и стоимость поверки"
+        id="contact-block"
     />
 
     <Footer />

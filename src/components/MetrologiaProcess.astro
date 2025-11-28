@@ -1,0 +1,93 @@
+---
+const steps = [
+    { title: "Заявка и согласование", description: "Вы оставляете заявку, мы согласовываем сроки и стоимость демонтажа, транспортировки и самой поверки." },
+    { title: "Демонтаж и транспортировка", description: "Наша бригада проводит аккуратный демонтаж оборудования и организует его безопасную доставку в аттестованную лабораторию." },
+    { title: "Поверка в лаборатории", description: "Специалисты проводят испытания в соответствии с методикой. В случае успеха выдается свидетельство о поверке." },
+    { title: "Монтаж и пломбировка", description: "Мы возвращаем поверенный прибор, устанавливаем его на место и проводим опломбировку, фиксируя готовность к эксплуатации." },
+    { title: "Регистрация в ФГИС «Аршин»", description: "Самый важный этап: мы гарантируем внесение сведений о результатах поверки в реестр ФГИС «Аршин» в установленный срок." },
+];
+---
+<div class="container metrologia-process-section">
+    <h2 class="section-title">Процесс поверки — от А до Я</h2>
+    <p class="section-subtitle">
+        Мы полностью исключаем ваше участие в бюрократических процессах.
+    </p>
+
+    <div class="process-grid">
+        {steps.map((step, index) => (
+            <div class="process-step">
+                <span class="step-number">{index + 1}</span>
+                <h3 class="step-title">{step.title}</h3>
+                <p class="step-description">{step.description}</p>
+            </div>
+        ))}
+    </div>
+</div>
+
+<style>
+    .metrologia-process-section {
+        padding-bottom: 80px;
+        text-align: center;
+    }
+    .section-title {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .section-subtitle {
+        color: var(--text-gray);
+        max-width: 700px;
+        margin: 0 auto 60px auto;
+    }
+    .process-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+    }
+    .process-step {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        padding: 25px 15px;
+        border-radius: 5px;
+        transition: border-color 0.3s, transform 0.3s;
+        height: 100%; /* Гарантируем одинаковую высоту */
+    }
+    .process-step:hover {
+        border-color: var(--error);
+        transform: translateY(-5px);
+    }
+    .step-number {
+        display: block;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--error);
+        margin-bottom: 10px;
+        line-height: 1;
+    }
+    .step-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 10px;
+    }
+    .step-description {
+        color: var(--text-gray);
+        font-size: 14px;
+    }
+    
+    @media (max-width: 1200px) {
+        .process-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 800px) {
+        .process-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 500px) {
+        .process-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
