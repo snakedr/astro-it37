@@ -1,0 +1,83 @@
+---
+---
+<div class="container maintenance-viz-block">
+    <div class="screen-wrapper">
+        <div class="screen-header">
+            Мониторинг теплового узла (UDU-27/05) | Статус: OK
+        </div>
+        <div class="screen-content">
+            <div class="param-group">
+                <span class="param-label">Температура подачи (T1):</span>
+                <span class="param-value active">68.5 °C</span>
+            </div>
+            <div class="param-group">
+                <span class="param-label">Температура обратки (T2):</span>
+                <span class="param-value">47.2 °C</span>
+            </div>
+            <div class="param-group">
+                <span class="param-label">Давление в сети:</span>
+                <span class="param-value">5.8 бар</span>
+            </div>
+            <div class="log-message">
+                <span class="timestamp">09:45:12 |</span> Система работает в штатном режиме.
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .maintenance-viz-block {
+        padding: 60px 0;
+    }
+    .screen-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid var(--accent); /* Используем акцентный цвет Обслуживания */
+        border-radius: 4px;
+        overflow: hidden;
+        background: #0a0a0a;
+        box-shadow: 0 0 20px var(--accent-dim);
+    }
+    .screen-header {
+        background: var(--accent);
+        color: var(--text-inverted);
+        padding: 10px 15px;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: left;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .screen-content {
+        padding: 20px;
+        color: #ddd;
+        font-family: 'Consolas', 'Courier New', monospace;
+    }
+    .param-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #333;
+        padding-bottom: 5px;
+    }
+    .param-label {
+        color: var(--text-gray);
+    }
+    .param-value {
+        font-weight: 700;
+        color: white;
+    }
+    .param-value.active {
+        color: #00ff66; /* Ярко-зеленый для активного показателя */
+    }
+    .log-message {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 2px solid var(--accent);
+        color: #aaa;
+        font-size: 13px;
+    }
+    .timestamp {
+        color: var(--accent);
+        font-weight: 700;
+    }
+</style>
