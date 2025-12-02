@@ -85,9 +85,14 @@ const BASE_P = 5.8;
 
 <style>
     /* ... Стили CSS остаются неизменными ... */
-    .maintenance-viz-block { padding: 0; }
+    .maintenance-viz-block { 
+        padding: 0; 
+        width: 100%; 
+        min-width: 0; /* ГЛАВНАЯ ФИКСАЦИЯ: разрешает сжатие */
+    }
     .screen-wrapper {
-        width: 100%;
+        width: 100%; 
+        min-width: 0; /* ГЛАВНАЯ ФИКСАЦИЯ: разрешает сжатие внутреннего контента */
         border: 1px solid var(--accent);
         border-radius: 4px;
         overflow: hidden;

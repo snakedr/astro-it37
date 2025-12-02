@@ -28,10 +28,10 @@ const ACTIVE_LINK = "Обслуживание";
     
     <div class="container"> 
         <div class="proactive-layout"> 
-            <ProactiveMaintenanceInfo class="text-block" />
-            <MaintenanceViz class="viz-block" />
+            <ProactiveMaintenanceInfo class="text-block" />
+            <MaintenanceViz class="viz-block" />
         </div>
-    </div>
+    </div>
   </section>
 
   <ConstrainedContactBanner
@@ -51,19 +51,18 @@ const ACTIVE_LINK = "Обслуживание";
         align-items: flex-start;
         gap: 40px;
         margin-top: 60px;
-        width: 100%;
-        max-width: none; 
     }
     
     .proactive-layout :global(.text-block) {
-        flex: 0 0 400px;
-        width: 400px !important;
-        max-width: 400px !important;
+        flex: 0 0 calc(40% - 20px); 
+        max-width: calc(40% - 20px);
+        min-width: 0;
     }
     
     .proactive-layout :global(.viz-block) {
-        flex: 1 1 0%;
-        min-width: 0 !important;
+        flex: 0 0 calc(60% - 20px);
+        max-width: calc(60% - 20px);
+        min-width: 0;
     }
     
     @media (max-width: 900px) {
@@ -76,8 +75,7 @@ const ACTIVE_LINK = "Обслуживание";
         .proactive-layout :global(.text-block),
         .proactive-layout :global(.viz-block) {
             flex: 1 1 100%;  
-            width: 100% !important;
-            max-width: 100% !important;
+            max-width: 100%;
         }
     }
 </style>
