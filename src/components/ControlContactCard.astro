@@ -2,58 +2,69 @@
 // Фронтматтер пуст, так как компонент не принимает props
 ---
 <div class="control-contact-card">
-    <div class="card-content">
-        <h2>Запрос на подключение к Диспетчеризации</h2>
-        <p class="contact-info">
-            **Телефон:** +7 (4932) 37-25-55 (доб. 100) | **E-mail:** np@it37.ru
-        </p>
-        <a href="/contacts" class="btn primary">Получить демо-доступ</a>
-    </div>
+  <div class="card-content">
+    <h2>Запрос на подключение к Диспетчеризации</h2>
+    <p class="contact-info">
+      **Телефон:** <a href="tel:+74932372555;ext=100" class="contact-link">+7 (4932) 37-25-55 (доб. 100)</a> | 
+            **E-mail:** <a href="mailto:np@it37.ru" class="contact-link">np@it37.ru</a>
+    </p>
+    <a href="/contacts" class="btn primary">Получить демо-доступ</a>
+  </div>
 </div>
 
 <style>
+  .control-contact-card {
+    margin-top: 80px;
+    margin-bottom: 80px; /* Отступ до футера */
+    padding: 60px 40px;
+    background: var(--bg-panel);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+   
+    /* Декоративная подсветка */
+    box-shadow: 0 0 30px var(--accent-dim);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .control-contact-card h2 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 28px;
+  }
+
+  .contact-info {
+    color: var(--text-gray); /* Основной текст серый */
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+
+    /* !!! ИСПРАВЛЕНИЕ: ССЫЛКИ СТАНОВЯТСЯ БЕЛЫМИ !!! */
+    .contact-info .contact-link {
+        color: white; /* Делаем ссылки белыми */
+        text-decoration: none; /* Убираем подчеркивание */
+        transition: color 0.3s;
+    }
+    .contact-info .contact-link:hover {
+        color: var(--accent); /* При наведении делаем акцентным */
+    }
+
+  /* Медиа-запросы для адаптивности */
+  @media (max-width: 600px) {
     .control-contact-card {
-        margin-top: 80px;
-        margin-bottom: 80px; /* Отступ до футера */
-        padding: 60px 40px;
-        background: var(--bg-panel);
-        border: 1px solid var(--accent);
-        border-radius: 5px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        
-        /* Декоративная подсветка */
-        box-shadow: 0 0 30px var(--accent-dim);
+      padding: 40px 20px;
     }
-
-    .card-content {
-        position: relative;
-        z-index: 2;
-    }
-
     .control-contact-card h2 {
-        color: var(--accent);
-        margin-bottom: 15px;
-        font-size: 28px;
+      font-size: 24px;
     }
-
     .contact-info {
-        color: var(--text-gray);
-        margin-bottom: 30px;
-        font-size: 16px;
+      font-size: 14px;
     }
-
-    /* Медиа-запросы для адаптивности */
-    @media (max-width: 600px) {
-        .control-contact-card {
-            padding: 40px 20px;
-        }
-        .control-contact-card h2 {
-            font-size: 24px;
-        }
-        .contact-info {
-            font-size: 14px;
-        }
-    }
+  }
 </style>
