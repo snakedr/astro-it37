@@ -1,48 +1,93 @@
 ---
-// Получаем время при компиляции (сборке) проекта
+// Фронтматтер (остается для генерации времени сборки, но будет переопределен скриптом)
 const now = new Date();
 const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
 const dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
 
-// Формат для шапки: ГГ.ММ.ДД - ЧЧ:ММ:СС
 const fullTimestamp = `${now.toLocaleDateString('ru-RU', dateOptions)} - ${now.toLocaleTimeString('ru-RU', timeOptions)}`;
-
-// Формат для лога: ЧЧ:ММ:СС
 const logTimeString = now.toLocaleTimeString('ru-RU', timeOptions);
+
+// Базовые значения для генерации колебаний
+const BASE_T1 = 68.5;
+const BASE_T2 = 47.2;
+const BASE_P = 5.8;
 ---
 
 <div class="container maintenance-viz-block">
     <div class="screen-wrapper">
         <div class="screen-header">
-            Мониторинг теплового узла (UDU-27/05) | Время: **{fullTimestamp}**
+            Мониторинг теплового узла (UDU-27/05) | Время: <span id="current-time">{fullTimestamp}</span>
         </div>
         <div class="screen-content">
             <div class="param-group">
                 <span class="param-label">Температура подачи (T1):</span>
-                <span class="param-value active">68.5 °C</span>
+                <span class="param-value active" id="temp-t1">{BASE_T1.toFixed(1)} °C</span>
             </div>
             <div class="param-group">
                 <span class="param-label">Температура обратки (T2):</span>
-                <span class="param-value">47.2 °C</span>
+                <span class="param-value" id="temp-t2">{BASE_T2.toFixed(1)} °C</span>
             </div>
             <div class="param-group">
                 <span class="param-label">Давление в сети:</span>
-                <span class="param-value">5.8 бар</span>
+                <span class="param-value" id="pressure-p">{BASE_P.toFixed(1)} бар</span>
             </div>
             <div class="log-message">
-                <span class="timestamp">{logTimeString} |</span> Система работает в штатном режиме.
+                <span class="timestamp" id="log-time">{logTimeString} |</span> Система работает в штатном режиме.
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    // ----------------------------------------------------
+    // Логика динамического обновления (Клиентский JavaScript)
+    // ----------------------------------------------------
+    const T1_BASE = 68.5;
+    const T2_BASE = 47.2;
+    const P_BASE = 5.8;
+    const MAX_DEVIATION = 0.5; // Максимальное отклонение +/- 0.5
+
+    // Получаем элементы по ID
+    const elT1 = document.getElementById('temp-t1');
+    const elT2 = document.getElementById('temp-t2');
+    const elP = document.getElementById('pressure-p');
+    const elLogTime = document.getElementById('log-time');
+    const elCurrentTime = document.getElementById('current-time');
+
+    // Функция для получения случайного значения с отклонением
+    const getRandomDeviation = (base) => {
+        // Случайное число от -0.5 до +0.5
+        const deviation = (Math.random() - 0.5) * 2 * MAX_DEVIATION;
+        return (base + deviation).toFixed(1);
+    };
+
+    // Основная функция обновления
+    const updateViz = () => {
+        // 1. Обновление значений
+        if (elT1) elT1.textContent = `${getRandomDeviation(T1_BASE)} °C`;
+        if (elT2) elT2.textContent = `${getRandomDeviation(T2_BASE)} °C`;
+        if (elP) elP.textContent = `${getRandomDeviation(P_BASE)} бар`;
+
+        // 2. Обновление времени
+        const now = new Date();
+        const logTime = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const fullTime = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const fullDate = now.toLocaleDateString('ru-RU', { month: '2-digit', day: '2-digit', year: 'numeric' });
+        
+        if (elLogTime) elLogTime.textContent = `${logTime} |`;
+        if (elCurrentTime) elCurrentTime.textContent = `${fullDate} - ${fullTime}`;
+    };
+
+    // Запускаем обновление сразу и затем каждую секунду
+    updateViz();
+    setInterval(updateViz, 1000); 
+</script>
+
 <style>
-    /* ... Стили, которые мы добавили ранее, остаются здесь ... */
-    .maintenance-viz-block {
-        padding: 0; /* Убираем лишний паддинг, он задан в родительском файле */
-    }
+    /* ... Стили CSS остаются неизменными ... */
+    .maintenance-viz-block { padding: 0; }
     .screen-wrapper {
-        width: 100%; /* Занимает всю отведенную ширину */
+        width: 100%;
         border: 1px solid var(--accent);
         border-radius: 4px;
         overflow: hidden;
@@ -58,7 +103,25 @@ const logTimeString = now.toLocaleTimeString('ru-RU', timeOptions);
         text-align: left;
         font-family: 'Orbitron', sans-serif;
     }
-    /* ... остальные стили ... */
+    .screen-content {
+        padding: 20px;
+        color: #ddd;
+        font-family: 'Consolas', 'Courier New', monospace;
+    }
+    .param-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #333;
+        padding-bottom: 5px;
+    }
+    .param-label {
+        color: var(--text-gray);
+    }
+    .param-value {
+        font-weight: 700;
+        color: white;
+    }
     .param-value.active {
         color: #00ff66;
     }
