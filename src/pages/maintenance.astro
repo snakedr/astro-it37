@@ -48,22 +48,15 @@ const ACTIVE_LINK = "Обслуживание";
 <style>
     .proactive-layout {
         display: flex;
-        /* Выравнивание по верхнему краю для правильного старта */
         align-items: flex-start;
         gap: 40px;
         margin-top: 60px;
     }
 
-    /* * ОПТИМИЗАЦИЯ: Убран max-width и !important. 
-     * Flex-basis (40% - 20px) задает нужную ширину.
-    */
     .proactive-layout :global(.text-block) {
         flex: 0 0 calc(40% - 20px);
     }
 
-    /* * ОПТИМИЗАЦИЯ: Убран max-width и !important. 
-     * Flex-basis (60% - 20px) задает нужную ширину.
-    */
     .proactive-layout :global(.viz-block) {
         flex: 0 0 calc(60% - 20px);
     }
@@ -78,7 +71,7 @@ const ACTIVE_LINK = "Обслуживание";
         .proactive-layout :global(.text-block),
         .proactive-layout :global(.viz-block) {
             flex: 1 1 100%;
-            max-width: 100%; /* max-width здесь полезен, так как flex-basis = 100% */
+            max-width: 100%;
         }
     }
 </style>
