@@ -35,8 +35,8 @@ const ACTIVE_LINK = "Обслуживание";
   {/* ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ */}
   <ConstrainedContactBanner
     title="Связаться с отделом Обслуживания"
-    phone="+7 (4932) 37-25-55 (доб. 103)"
-    email="service@it37.ru"
+    phone="+7 (4932) 37-25-55 (доб. 100)"
+    email="snv@it37.ru"
     buttonText="Оставить заявку на ремонт или обслуживание"
     id="contact-block"
   />
@@ -52,10 +52,15 @@ const ACTIVE_LINK = "Обслуживание";
         margin-top: 60px;
     }
 
-    /* Используем :global() для применения стилей к дочерним компонентам */
-    .proactive-layout :global(.text-block),
+    /* !!! ИСПРАВЛЕНИЕ 40/60 !!! */
+    /* Текстовый блок - 40% */
+    .proactive-layout :global(.text-block) {
+        flex: 1 1 40%; 
+    }
+    
+    /* Визуальный блок - 60% */
     .proactive-layout :global(.viz-block) {
-        flex: 1 1 50%; /* Делаем так, чтобы каждый блок занимал равное пространство */
+        flex: 1 1 60%; 
     }
     
     /* Медиа-запрос: на маленьких экранах возвращаем элементы в колонку */
@@ -65,9 +70,10 @@ const ACTIVE_LINK = "Обслуживание";
             align-items: center;
         }
         
+        /* На мобильных экранах оба блока занимают 100% */
         .proactive-layout :global(.text-block),
         .proactive-layout :global(.viz-block) {
-            flex: 1 1 100%; 
+            flex: 1 1 100%;  
         }
     }
 </style>
