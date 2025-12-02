@@ -55,17 +55,15 @@ const ACTIVE_LINK = "Обслуживание";
         max-width: none; 
     }
     
-    /* Текстовый блок - ФИКСИРОВАННАЯ ШИРИНА */
     .proactive-layout :global(.text-block) {
-        flex: 0 0 400px; /* Фиксируем ширину текста */
+        flex: 0 0 400px;
         width: 400px !important;
         max-width: 400px !important;
     }
     
-    /* Визуальный блок - Занимает все ОСТАЛЬНОЕ место */
     .proactive-layout :global(.viz-block) {
-        flex: 1 1 0%; /* Позволяем ему расти и сжиматься, занимая остаток */
-        min-width: 0; /* Важно, чтобы позволить ему сжиматься */
+        flex: 1 1 0%;
+        min-width: 0 !important;
     }
     
     @media (max-width: 900px) {
