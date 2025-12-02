@@ -26,10 +26,12 @@ const ACTIVE_LINK = "Обслуживание";
   <section class="section" style="padding-top: 0;">
     <MaintenanceCards />
     
-    <div class="proactive-layout container">
-        <ProactiveMaintenanceInfo class="text-block" />
-        <MaintenanceViz class="viz-block" />
-    </div>
+    <div class="container"> 
+        <div class="proactive-layout"> 
+            <ProactiveMaintenanceInfo class="text-block" />
+            <MaintenanceViz class="viz-block" />
+        </div>
+    </div>
   </section>
 
   {/* ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ */}
@@ -45,6 +47,7 @@ const ACTIVE_LINK = "Обслуживание";
 </MainLayout>
 
 <style>
+    /* proactive-layout теперь применяется к внутреннему div и гарантированно работает как Flexbox */
     .proactive-layout {
         display: flex; /* Активируем Flexbox */
         align-items: flex-start;
@@ -52,19 +55,16 @@ const ACTIVE_LINK = "Обслуживание";
         margin-top: 60px;
     }
 
-    /* Используем :global() для применения стилей к дочерним компонентам */
+    /* !!! Используем calc() для гарантии 40/60, компенсируя отступ (gap) !!! */
     
-    /* Текстовый блок - 50% */
+    /* Текстовый блок - 40% */
     .proactive-layout :global(.text-block) {
-        flex: 0 0 50%; /* Запрещаем сжатие/растяжение, фиксируем базовый размер 50% */
-        /* Дополнительное правило, если нужно, хотя flex: 0 0 50% должно работать */
-        /* max-width: 50%; */ 
+        flex: 0 0 calc(40% - 20px); /* 40% минус половина отступа */
     }
     
-    /* Визуальный блок - 50% */
+    /* Визуальный блок - 60% */
     .proactive-layout :global(.viz-block) {
-        flex: 0 0 50%; /* Запрещаем сжатие/растяжение, фиксируем базовый размер 60% */
-        /* max-width: 50%; */
+        flex: 0 0 calc(60% - 20px); /* 60% минус половина отступа */
     }
     
     /* Медиа-запрос: на маленьких экранах возвращаем элементы в колонку */
@@ -72,6 +72,7 @@ const ACTIVE_LINK = "Обслуживание";
         .proactive-layout {
             flex-direction: column;
             align-items: center;
+            gap: 20px; /* Уменьшаем отступ на мобильных */
         }
         
         /* На мобильных экранах оба блока занимают 100% */
