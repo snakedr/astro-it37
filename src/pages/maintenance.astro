@@ -1,9 +1,9 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro'; 
+import Footer from '@/components/Footer.astro';
 import MaintenanceViz from '@/components/MaintenanceViz.astro';
-import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
+import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro';
 import MaintenanceCards from '@/components/MaintenanceCards.astro';
 import ProactiveMaintenanceInfo from '@/components/ProactiveMaintenanceInfo.astro';
 
@@ -12,7 +12,7 @@ const ACTIVE_LINK = "Обслуживание";
 
 <MainLayout title="Обслуживание и Ремонт | IT37" activeLink={ACTIVE_LINK}>
   <Header activeLink={ACTIVE_LINK} />
-  
+
   <section class="hero-page">
     <div class="container">
       <h1 style="color:var(--success);">Техническое Обслуживание</h1>
@@ -25,13 +25,13 @@ const ACTIVE_LINK = "Обслуживание";
 
   <section class="section" style="padding-top: 0;">
     <MaintenanceCards />
-    
-    <div class="container"> 
-        <div class="proactive-layout"> 
+
+    <div class="container">
+        <div class="proactive-layout">
         <ProactiveMaintenanceInfo class="text-block" />
         <MaintenanceViz class="viz-block" />
         </div>
-  </div>
+    </div>
   </section>
 
   <ConstrainedContactBanner
@@ -49,38 +49,36 @@ const ACTIVE_LINK = "Обслуживание";
     .proactive-layout {
         display: flex;
         /* Выравнивание по верхнему краю для правильного старта */
-        align-items: flex-start; 
+        align-items: flex-start;
         gap: 40px;
         margin-top: 60px;
     }
-    
+
+    /* * ОПТИМИЗАЦИЯ: Убран max-width и !important. 
+     * Flex-basis (40% - 20px) задает нужную ширину.
+    */
     .proactive-layout :global(.text-block) {
-        flex: 0 0 calc(40% - 20px); 
-        max-width: calc(40% - 20px);
-        min-width: 0;
-        /* Устранение возможного смещения */
-        margin-top: 0 !important; 
+        flex: 0 0 calc(40% - 20px);
     }
-    
+
+    /* * ОПТИМИЗАЦИЯ: Убран max-width и !important. 
+     * Flex-basis (60% - 20px) задает нужную ширину.
+    */
     .proactive-layout :global(.viz-block) {
         flex: 0 0 calc(60% - 20px);
-        max-width: calc(60% - 20px);
-        min-width: 0;
-        /* Устранение возможного смещения */
-        margin-top: 0 !important;
     }
-    
+
     @media (max-width: 900px) {
         .proactive-layout {
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
-        
+
         .proactive-layout :global(.text-block),
         .proactive-layout :global(.viz-block) {
-            flex: 1 1 100%;  
-            max-width: 100%;
+            flex: 1 1 100%;
+            max-width: 100%; /* max-width здесь полезен, так как flex-basis = 100% */
         }
     }
 </style>
