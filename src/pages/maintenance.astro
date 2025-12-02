@@ -54,17 +54,18 @@ const ACTIVE_LINK = "Обслуживание";
         width: 100%;
         max-width: none; 
     }
-
+    
+    /* Текстовый блок - ФИКСИРОВАННАЯ ШИРИНА */
     .proactive-layout :global(.text-block) {
-        flex: 0 0 calc(40% - 20px); 
-        width: calc(40% - 20px) !important;
-        max-width: calc(40% - 20px) !important;
+        flex: 0 0 400px; /* Фиксируем ширину текста */
+        width: 400px !important;
+        max-width: 400px !important;
     }
     
+    /* Визуальный блок - Занимает все ОСТАЛЬНОЕ место */
     .proactive-layout :global(.viz-block) {
-        flex: 0 0 calc(60% - 20px);
-        width: calc(60% - 20px) !important;
-        max-width: calc(60% - 20px) !important;
+        flex: 1 1 0%; /* Позволяем ему расти и сжиматься, занимая остаток */
+        min-width: 0; /* Важно, чтобы позволить ему сжиматься */
     }
     
     @media (max-width: 900px) {
