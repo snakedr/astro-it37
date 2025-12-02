@@ -1,9 +1,20 @@
 ---
+// Получаем время при компиляции (сборке) проекта
+const now = new Date();
+const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+const dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
+
+// Формат для шапки: ГГ.ММ.ДД - ЧЧ:ММ:СС
+const fullTimestamp = `${now.toLocaleDateString('ru-RU', dateOptions)} - ${now.toLocaleTimeString('ru-RU', timeOptions)}`;
+
+// Формат для лога: ЧЧ:ММ:СС
+const logTimeString = now.toLocaleTimeString('ru-RU', timeOptions);
 ---
+
 <div class="container maintenance-viz-block">
     <div class="screen-wrapper">
         <div class="screen-header">
-            Мониторинг теплового узла (UDU-27/05) | Статус: OK
+            Мониторинг теплового узла (UDU-27/05) | Время: **{fullTimestamp}**
         </div>
         <div class="screen-content">
             <div class="param-group">
@@ -19,20 +30,20 @@
                 <span class="param-value">5.8 бар</span>
             </div>
             <div class="log-message">
-                <span class="timestamp">09:45:12 |</span> Система работает в штатном режиме.
+                <span class="timestamp">{logTimeString} |</span> Система работает в штатном режиме.
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    /* ... Стили, которые мы добавили ранее, остаются здесь ... */
     .maintenance-viz-block {
-        padding: 60px 0;
+        padding: 0; /* Убираем лишний паддинг, он задан в родительском файле */
     }
     .screen-wrapper {
-        max-width: 800px;
-        margin: 0 auto;
-        border: 1px solid var(--accent); /* Используем акцентный цвет Обслуживания */
+        width: 100%; /* Занимает всю отведенную ширину */
+        border: 1px solid var(--accent);
         border-radius: 4px;
         overflow: hidden;
         background: #0a0a0a;
@@ -47,27 +58,9 @@
         text-align: left;
         font-family: 'Orbitron', sans-serif;
     }
-    .screen-content {
-        padding: 20px;
-        color: #ddd;
-        font-family: 'Consolas', 'Courier New', monospace;
-    }
-    .param-group {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        border-bottom: 1px dashed #333;
-        padding-bottom: 5px;
-    }
-    .param-label {
-        color: var(--text-gray);
-    }
-    .param-value {
-        font-weight: 700;
-        color: white;
-    }
+    /* ... остальные стили ... */
     .param-value.active {
-        color: #00ff66; /* Ярко-зеленый для активного показателя */
+        color: #00ff66;
     }
     .log-message {
         margin-top: 20px;

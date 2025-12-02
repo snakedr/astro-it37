@@ -27,12 +27,12 @@ const ACTIVE_LINK = "Обслуживание";
     <MaintenanceCards />
     
     <div class="proactive-layout container">
-        <ProactiveMaintenanceInfo />
-        <MaintenanceViz />
+        <ProactiveMaintenanceInfo class="text-block" />
+        <MaintenanceViz class="viz-block" />
     </div>
   </section>
 
-  {/* !!! ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ (ИСПРАВЛЕНО) !!! */}
+  {/* ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ */}
   <ConstrainedContactBanner
     title="Связаться с отделом Обслуживания"
     phone="+7 (4932) 37-25-55 (доб. 103)"
@@ -45,19 +45,29 @@ const ACTIVE_LINK = "Обслуживание";
 </MainLayout>
 
 <style>
-    /* Стиль для размещения текста и виджета в одну линию */
     .proactive-layout {
         display: flex; /* Активируем Flexbox */
-        align-items: flex-start; /* Выравнивание элементов по верху */
-        gap: 40px; /* Отступ между блоками */
-        margin-top: 60px; /* Отступ от MaintenanceCards */
+        align-items: flex-start;
+        gap: 40px;
+        margin-top: 60px;
     }
 
+    /* Используем :global() для применения стилей к дочерним компонентам */
+    .proactive-layout :global(.text-block),
+    .proactive-layout :global(.viz-block) {
+        flex: 1 1 50%; /* Делаем так, чтобы каждый блок занимал равное пространство */
+    }
+    
     /* Медиа-запрос: на маленьких экранах возвращаем элементы в колонку */
     @media (max-width: 900px) {
         .proactive-layout {
             flex-direction: column;
             align-items: center;
+        }
+        
+        .proactive-layout :global(.text-block),
+        .proactive-layout :global(.viz-block) {
+            flex: 1 1 100%; 
         }
     }
 </style>
