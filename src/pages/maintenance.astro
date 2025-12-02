@@ -12,12 +12,12 @@ const ACTIVE_LINK = "Обслуживание";
 
 <MainLayout title="Обслуживание и Ремонт | IT37" activeLink={ACTIVE_LINK}>
   <Header activeLink={ACTIVE_LINK} />
- 
+  
   <section class="hero-page">
     <div class="container">
       <h1 style="color:var(--success);">Техническое Обслуживание</h1>
       <p>
-        Обеспечение бесперебойной работы узлов учета. **Превентивное** и **абонентское** обслуживание, позволяющее избежать аварийных ситуаций и штрафов со стороны ресурсоснабжающих организаций.
+        Обеспечение бесперебойной работы узлов учета. <strong>Превентивное</strong> и <strong>абонентское</strong> обслуживание, позволяющее избежать аварийных ситуаций и штрафов со стороны ресурсоснабжающих организаций.
       </p>
       <a href="#contact-block" class="btn">Запросить договор на обслуживание</a>
     </div>
@@ -25,8 +25,11 @@ const ACTIVE_LINK = "Обслуживание";
 
   <section class="section" style="padding-top: 0;">
     <MaintenanceCards />
-    <MaintenanceViz />
-    <ProactiveMaintenanceInfo />
+    
+    <div class="proactive-layout container">
+        <ProactiveMaintenanceInfo />
+        <MaintenanceViz />
+    </div>
   </section>
 
   {/* !!! ФИНАЛЬНЫЙ БЛОК: ОТДЕЛ ОБСЛУЖИВАНИЯ (ИСПРАВЛЕНО) !!! */}
@@ -35,8 +38,26 @@ const ACTIVE_LINK = "Обслуживание";
     phone="+7 (4932) 37-25-55 (доб. 103)"
     email="service@it37.ru"
     buttonText="Оставить заявку на ремонт или обслуживание"
-        id="contact-block"
+    id="contact-block"
   />
 
   <Footer />
 </MainLayout>
+
+<style>
+    /* Стиль для размещения текста и виджета в одну линию */
+    .proactive-layout {
+        display: flex; /* Активируем Flexbox */
+        align-items: flex-start; /* Выравнивание элементов по верху */
+        gap: 40px; /* Отступ между блоками */
+        margin-top: 60px; /* Отступ от MaintenanceCards */
+    }
+
+    /* Медиа-запрос: на маленьких экранах возвращаем элементы в колонку */
+    @media (max-width: 900px) {
+        .proactive-layout {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
