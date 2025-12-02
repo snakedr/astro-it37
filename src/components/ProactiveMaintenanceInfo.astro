@@ -9,14 +9,15 @@
         <a href="/control" class="btn primary">Узнать о системе IT37 Control</a>
     </div>
 
-    </div>
+</div>
 
 <style>
     /* 1. Стиль для info-content, который теперь занимает всю ширину компонента */
     .proactive-info {
         padding-top: 60px;
         padding-bottom: 80px;
-        /* !!! УСТАРЕВШИЕ GRID-СТИЛИ УДАЛЕНЫ, ТЕПЕРЬ ОН ЧИСТЫЙ БЛОК ДЛЯ FLEXBOX !!! */
+        /* !!! ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ: Разрешаем перенос слов, чтобы контейнер мог сжиматься !!! */
+        overflow-wrap: break-word; 
     }
 
     .info-content h2 {
@@ -29,13 +30,13 @@
         line-height: 1.6;
     }
     
-    /* 2. Устаревший стиль для визуальной заглушки (visual-placeholder) удален */
-    
     /* 3. Медиа-запрос для мобильных устройств */
     @media (max-width: 1000px) {
         .proactive-info {
             padding-top: 40px;
             padding-bottom: 40px;
+            /* На мобильных сброс не нужен */
+            overflow-wrap: normal;
         }
         .info-content h2 {
             font-size: 28px;
