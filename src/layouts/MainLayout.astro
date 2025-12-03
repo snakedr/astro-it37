@@ -16,11 +16,10 @@ const {
   activeLink = "home"
 } = Astro.props;
 
-// Use Astro.url for dynamic canonical generation if not provided
-const finalCanonicalURL = canonicalURL?.toString() || new URL(Astro.url.pathname, Astro.site).toString();
+// Canonical URL logic (clean and robust)
+const finalCanonicalURL = canonicalURL?.toString() || (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
 const ogTitle = title.includes('|') ? title.split('|')[0].trim() : title;
 const siteName = 'IT37';
-
 const faviconPath = '/favicon.svg';
 
 ---
@@ -32,7 +31,7 @@ const faviconPath = '/favicon.svg';
   <title>{title}</title>
   <meta name="description" content={description} />
 
-    {finalCanonicalURL && <link rel="canonical" href={finalCanonicalURL} />}
+    {finalCanonicalURL ? <link rel="canonical" href={finalCanonicalURL} /> : null}
 
     <link rel="icon" href={faviconPath} type="image/svg+xml" />
 
@@ -41,7 +40,8 @@ const faviconPath = '/favicon.svg';
     <meta property="og:url" content={finalCanonicalURL} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content="website" />
-      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -73,7 +73,6 @@ const faviconPath = '/favicon.svg';
   </script>
  
   <style is:global>
-    /* Basic container and section styles for global use */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -85,13 +84,11 @@ const faviconPath = '/favicon.svg';
       position: relative;
     }
 
-    /* Hero */
     .hero-page {
       padding-top: 150px;
       padding-bottom: 50px;
     }
    
-    /* Grid background animation */
     .grid-bg {
       position: fixed;
       top: 0;
@@ -100,7 +97,6 @@ const faviconPath = '/favicon.svg';
       height: 100%;
       pointer-events: none;
       z-index: -1;
-      /* Variables from global.css are assumed here */
       background:
         linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
