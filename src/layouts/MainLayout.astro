@@ -1,119 +1,94 @@
+---
 // src/layouts/MainLayout.astro
 import Header from '@/components/Header.astro';
 import '@/styles/global.css';
 
-interface Props {
-  title?: string;
-  description?: string;
-  canonicalURL?: URL | string;
-  activeLink?: string;
-}
-
-const {
-  title = "IT37 | IT-решения для энергетики",
-  description = "Разработка и внедрение IT-решений для автоматизации и оптимизации бизнес-процессов в энергетическом секторе. Проектирование, контроль, метрология, монтаж.",
-  canonicalURL,
-  activeLink = "home"
-} = Astro.props;
-
-// Canonical URL logic (clean and robust)
-const finalCanonicalURL = canonicalURL?.toString() || (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
-const ogTitle = title.includes('|') ? title.split('|')[0].trim() : title;
-const siteName = 'IT37';
-const faviconPath = '/favicon.svg';
-
+// Важно: активная ссылка по умолчанию 'home'
+const { title = "IT37 | IT-решения для энергетики", activeLink = "home" } = Astro.props; 
 ---
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description} />
-
-    {finalCanonicalURL ? <link rel="canonical" href={finalCanonicalURL} /> : null}
-
-    <link rel="icon" href={faviconPath} type="image/svg+xml" />
-
-    <meta property="og:title" content={ogTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={finalCanonicalURL} />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:type" content="website" />
-    
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="grid-bg"></div>
- 
-  <Header activeLink={activeLink} /> <slot />
- 
-  <script>
-    // BURGER MENU LOGIC
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.querySelector('.menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
+    <div class="grid-bg"></div> 
+    
+    <Header activeLink={activeLink} /> <slot />
+    
+    <script>
+        // ЛОГИКА БУРГЕР-МЕНЮ (Вынесена сюда, чтобы работала на всех страницах)
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
 
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-          navLinks.classList.toggle('open');
-          menuToggle.classList.toggle('open');
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
+                });
+
+                // Закрытие меню при клике на ссылку
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('open');
+                        menuToggle.classList.remove('open');
+                    });
+                });
+            }
         });
+    </script>
+    
+    <style is:global>
+        /* Базовые стили контейнеров и секций, которые не всегда в global.css */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-        // Close menu on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            menuToggle.classList.remove('open');
-          });
-        });
-      }
-    });
-  </script>
- 
-  <style is:global>
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
 
-    .section {
-      padding: 100px 0;
-      position: relative;
-    }
+        /* Hero */
+        .hero-page {
+            padding-top: 150px;
+            padding-bottom: 50px;
+        }
+        
+        /* Анимация фона сетки (зависит от переменных из global.css) */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            /* Переменные берутся из global.css */
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: moveGrid 60s linear infinite;
+        }
 
-    .hero-page {
-      padding-top: 150px;
-      padding-bottom: 50px;
-    }
-   
-    .grid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-      opacity: 0.1;
-      animation: moveGrid 60s linear infinite;
-    }
-
-    @keyframes moveGrid {
-      from { background-position: 0 0; }
-      to { background-position: 50px 50px; }
-    }
-   
-    @media (max-width: 900px) {
-      .section { padding: 50px 0; }
-      .hero-page { padding-top: 100px; }
-    }
-  </style>
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+        
+        @media (max-width: 900px) {
+            .section { padding: 50px 0; }
+            .hero-page { padding-top: 100px; }
+        }
+    </style>
 </body>
 </html>
