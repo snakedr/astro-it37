@@ -1,47 +1,47 @@
 /* =======================================
-  1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И СБРОС СТИЛЕЙ
-  ======================================= */
+ 1. GLOBAL VARIABLES AND RESET
+ ======================================= */
 :root {
-    --bg-deep: #050507;
-    --bg-panel: #0f1014;
-    --accent: #00f2ff; 
-    --accent-dim: rgba(0, 242, 255, 0.1);
-    --secondary: #5d3fd3; 
-    --orange: #ff4d4d;
-    --text-main: #ffffff;
-    --text-gray: #a1a1aa;
-    --border: rgba(255,255,255,0.1);
-    --success: #00ff80;
+  --bg-deep: #050507;
+  --bg-panel: #0f1014;
+  --accent: #00f2ff;
+  --accent-dim: rgba(0, 242, 255, 0.1);
+  --secondary: #5d3fd3;
+  --orange: #ff4d4d;
+  --text-main: #ffffff;
+  --text-gray: #a1a1aa;
+  --border: rgba(255,255,255,0.1);
+  --success: #00ff80;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: var(--bg-deep);
-    color: var(--text-main);
-    font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
-    line-height: 1.6;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
 h1, h2, h3, .font-tech { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
 
 .grid-bg {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.15;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.15;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
- 
+
 .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; }
 
-/* --- КНОПКИ --- */
+/* --- BUTTONS --- */
 .btn {
-    position: relative; padding: 16px 32px; font-family: 'Orbitron', sans-serif; font-size: 14px;
-    font-weight: 700; color: var(--accent); background: transparent; border: 1px solid var(--accent);
-    text-decoration: none; overflow: hidden; transition: 0.4s; display: inline-flex;
-    align-items: center; gap: 10px; cursor: pointer;
+  position: relative; padding: 16px 32px; font-family: 'Orbitron', sans-serif; font-size: 14px;
+  font-weight: 700; color: var(--accent); background: transparent; border: 1px solid var(--accent);
+  text-decoration: none; overflow: hidden; transition: 0.4s; display: inline-flex;
+  align-items: center; gap: 10px; cursor: pointer;
 }
 .btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 30px var(--accent-dim); }
 .btn.primary { background: var(--accent); color: var(--bg-deep); border-color: var(--accent); }
@@ -49,64 +49,72 @@ h1, h2, h3, .font-tech { font-family: 'Orbitron', sans-serif; text-transform: up
 .desktop-only { display: block; }
 
 /* =======================================
-  2. СТИЛИ ХЕДЕРА И ФУТЕРА
-  ======================================= */
+ 2. HEADER AND FOOTER STYLES
+ ======================================= */
 header {
-    padding: 20px 0; border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; background: rgba(5,5,7,0.8);
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; background: rgba(5,5,7,0.8);
 }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 24px; font-weight: 900; color: white; font-family: 'Orbitron'; z-index: 101; }
 .logo span { color: var(--accent); }
 .nav-links { display: flex; gap: 40px; }
-.nav-links a { 
-    color: var(--text-gray); text-decoration: none; font-size: 14px; transition: 0.3s; 
-    text-transform: uppercase; font-weight: 500; 
+.nav-links a {
+  color: var(--text-gray); text-decoration: none; font-size: 14px; transition: 0.3s;
+  text-transform: uppercase; font-weight: 500;
 }
 .nav-links a:hover { color: var(--accent); }
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
 .menu-toggle {
-    display: none; background: transparent; border: none; cursor: pointer; padding: 10px; z-index: 101;
-    margin-left: auto; order: 2; 
+  display: none; background: transparent; border: none; cursor: pointer; padding: 10px; z-index: 101;
+  margin-left: auto; order: 2;
 }
 .menu-toggle .bar {
-    display: block; width: 25px; height: 3px; margin: 5px 0; background-color: var(--accent);
-    transition: 0.4s; border-radius: 1px;
+  display: block; width: 25px; height: 3px; margin: 5px 0; background-color: var(--accent);
+  transition: 0.4s; border-radius: 1px;
 }
 
 footer { border-top: 1px solid var(--border); padding: 60px 0; margin-top: 100px; font-size: 14px; color: var(--text-gray); }
 
 /* =======================================
-  3. СТИЛИ ГЛАВНОЙ СТРАНИЦЫ (HERO, DASHBOARD, SERVICES, METROLOGY)
-  ======================================= */
+ 3. HOMEPAGE STYLES (HERO, DASHBOARD, SERVICES, METROLOGY)
+ ======================================= */
 .section { padding: 100px 0; }
-.hero { min-height: 85vh; display: flex; align-items: center; position: relative; }
+
+.hero { 
+    /* FIX: Added padding-top to compensate for the sticky header height on zoom */
+    padding-top: 150px; 
+    min-height: 85vh; 
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+}
 .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 30px; line-height: 1.1; }
 .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
 .hero-desc { font-size: 18px; color: var(--text-gray); margin-bottom: 50px; max-width: 600px; border-left: 2px solid var(--accent); padding-left: 20px; }
-.ai-badge { 
-    background: var(--accent-dim); color: var(--accent); padding: 5px 10px; font-size: 12px; font-weight: 700; 
-    text-transform: uppercase; border: 1px solid var(--accent); display: inline-block; margin-bottom: 20px; 
+.ai-badge {
+  background: var(--accent-dim); color: var(--accent); padding: 5px 10px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; border: 1px solid var(--accent); display: inline-block; margin-bottom: 20px;
 }
 
 /* --- BACKGROUND AI BLOB --- */
 .ai-brain {
-    position: absolute; right: -10%; top: 20%; width: 600px; height: 600px;
-    background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
-    opacity: 0.2; filter: blur(60px); animation: pulse 5s infinite alternate;
+  position: absolute; right: -10%; top: 20%; width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  opacity: 0.2; filter: blur(60px); animation: pulse 5s infinite alternate;
 }
 @keyframes pulse { 0% { opacity: 0.2; transform: scale(1); } 100% { opacity: 0.4; transform: scale(1.1); } }
 
 /* --- DASHBOARD UI --- */
 .dashboard-ui {
-    background: #0b1221; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-    position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    display: grid; grid-template-columns: 3fr 1fr; font-family: 'JetBrains Mono', monospace;
+  background: #0b1221; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+  position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  display: grid; grid-template-columns: 3fr 1fr; font-family: 'JetBrains Mono', monospace;
 }
-.dashboard-ui::before { /* Сетка фона */
-    content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px; z-index: 0;
+.dashboard-ui::before { /* Background grid */
+  content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px; z-index: 0;
 }
 .chart-section { padding: 40px; border-right: 1px solid var(--border); position: relative; z-index: 1; }
 .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
@@ -117,20 +125,18 @@ footer { border-top: 1px solid var(--border); padding: 60px 0; margin-top: 100px
 .dot.blue { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 .graph-area { height: 300px; position: relative; border-left: 1px solid var(--text-gray); border-bottom: 1px solid var(--text-gray); }
 .line-old {
-    /* ... стили старой линии ... */
-    clip-path: polygon(0 80%, 15% 60%, 30% 85%, 45% 50%, 60% 70%, 75% 40%, 90% 65%, 100% 50%, 100% 100%, 0% 100%);
-    opacity: 0.6; animation: pulse-graph 4s infinite alternate;
+  clip-path: polygon(0 80%, 15% 60%, 30% 85%, 45% 50%, 60% 70%, 75% 40%, 90% 65%, 100% 50%, 100% 100%, 0% 100%);
+  opacity: 0.6; animation: pulse-graph 4s infinite alternate;
 }
 .line-new {
-    /* ... стили новой линии ... */
-    clip-path: polygon(0 90%, 15% 88%, 30% 85%, 45% 82%, 60% 80%, 75% 78%, 90% 76%, 100% 75%, 100% 100%, 0% 100%);
-    filter: drop-shadow(0 0 10px var(--accent)); z-index: 2; width: 0; animation: draw 2s ease-out forwards 0.5s;
+  clip-path: polygon(0 90%, 15% 88%, 30% 85%, 45% 82%, 60% 80%, 75% 78%, 90% 76%, 100% 75%, 100% 100%, 0% 100%);
+  filter: drop-shadow(0 0 10px var(--accent)); z-index: 2; width: 0; animation: draw 2s ease-out forwards 0.5s;
 }
 @keyframes draw { to { width: 100%; } }
 @keyframes pulse-graph { 0% { opacity: 0.4; } 100% { opacity: 0.7; } }
 .scanner-line {
-    position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.5);
-    box-shadow: 0 0 15px white; z-index: 10; animation: scan 4s linear infinite;
+  position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.5);
+  box-shadow: 0 0 15px white; z-index: 10; animation: scan 4s linear infinite;
 }
 @keyframes scan { 0% { left: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
 .savings-overlay { position: absolute; top: 20%; right: 10%; text-align: right; z-index: 20; }
@@ -140,9 +146,9 @@ footer { border-top: 1px solid var(--border); padding: 60px 0; margin-top: 100px
 /* --- SERVICES GRID --- */
 .services-title { margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
 .grid-tech { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.tech-card { 
-    background: var(--bg-deep); padding: 40px; transition: 0.3s; position: relative; 
-    text-decoration: none; color: var(--text-main);
+.tech-card {
+  background: var(--bg-deep); padding: 40px; transition: 0.3s; position: relative;
+  text-decoration: none; color: var(--text-main);
 }
 .tech-card:hover { background: var(--bg-panel); }
 .tech-card::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: 0.3s; }
@@ -154,34 +160,34 @@ footer { border-top: 1px solid var(--border); padding: 60px 0; margin-top: 100px
 /* --- METROLOGY --- */
 .metrology-block { background: var(--bg-panel); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 0; }
 
-/* --- CONTACT FORM (Главная) --- */
+/* --- CONTACT FORM (Homepage) --- */
 .form-dark { margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap; }
 .inp { background: transparent; border: 1px solid var(--text-gray); color: white; padding: 15px 20px; font-family: 'Orbitron'; width: 100%; transition: 0.3s; }
 .inp:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-dim); outline: none; }
 
 
 /* =======================================
-  4. МЕДИА-ЗАПРОСЫ (АДАПТИВНОСТЬ)
-  ======================================= */
+ 4. MEDIA QUERIES (RESPONSIVENESS)
+ ======================================= */
 @media (max-width: 900px) {
-    h1 { font-size: 32px; }
-    .big-percent { font-size: 40px; }
-    .ai-brain { display: none; }
+  h1 { font-size: 32px; }
+  .big-percent { font-size: 40px; }
+  .ai-brain { display: none; }
 
-    /* Навигация */
-    .nav-links {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-        background: var(--bg-deep); padding-top: 100px; 
-        flex-direction: column; gap: 0;
-        transform: translateX(100%); transition: transform 0.4s ease-in-out; z-index: 99;
-    }
-    .nav-links.open { transform: translateX(0); }
-    .nav-links a { padding: 15px 24px; border-bottom: 1px solid var(--border); width: 100%; display: block; }
-    .menu-toggle { display: block; }
-    .btn.desktop-only { display: none; }
-    
-    /* Сетки */
-    .dashboard-ui { grid-template-columns: 1fr; }
-    .console-section { display: none; } /* Скрываем консоль на мобильных */
-    .grid-tech { grid-template-columns: 1fr; } /* Сетка услуг в 1 колонку */
+  /* Navigation */
+  .nav-links {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: var(--bg-deep); padding-top: 100px;
+    flex-direction: column; gap: 0;
+    transform: translateX(100%); transition: transform 0.4s ease-in-out; z-index: 99;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a { padding: 15px 24px; border-bottom: 1px solid var(--border); width: 100%; display: block; }
+  .menu-toggle { display: block; }
+  .btn.desktop-only { display: none; }
+ 
+  /* Grids */
+  .dashboard-ui { grid-template-columns: 1fr; }
+  .console-section { display: none; }
+  .grid-tech { grid-template-columns: 1fr; }
 }
