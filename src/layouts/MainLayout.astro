@@ -2,106 +2,112 @@
 import Header from '@/components/Header.astro';
 import '@/styles/global.css';
 
+interface Props {
+  title?: string;
+  activeLink?: string;
+}
+
 const { title = "IT37 | IT-решения для энергетики", activeLink = "home" } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="ru">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>{title}</title>
- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
- <div class="grid-bg"></div>
+<div class="grid-bg"></div>
 
- <Header activeLink={activeLink} /> <slot />
+<Header activeLink={activeLink} /> <slot />
 
- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-   const menuToggle = document.querySelector('.menu-toggle');
-   const navLinks = document.querySelector('.nav-links');
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+ const menuToggle = document.querySelector('.menu-toggle');
+ const navLinks = document.querySelector('.nav-links');
 
-   if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-     navLinks.classList.toggle('open');
-     menuToggle.classList.toggle('open');
-    });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-     link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuToggle.classList.remove('open');
-     });
-    });
-   }
+ if (menuToggle && navLinks) {
+  menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  menuToggle.classList.toggle('open');
   });
- </script>
 
- <style is:global>
-  :root {
-   --font-primary: 'Roboto', sans-serif;
-   --font-display: 'Orbitron', sans-serif;
-   --font-mono: 'JetBrains Mono', monospace;
-   --color-neon: #00ffff;
-  }
+  navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+   navLinks.classList.remove('open');
+   menuToggle.classList.remove('open');
+  });
+  });
+ }
+ });
+</script>
 
-  body {
-   font-family: var(--font-primary);
-  }
+<style is:global>
+ :root {
+ --font-primary: 'Roboto', sans-serif;
+ --font-display: 'Orbitron', sans-serif;
+ --font-mono: 'JetBrains Mono', monospace;
+ --color-neon: #00ffff;
+ }
 
-  h1, h2, h3 {
-   font-family: var(--font-display);
-   color: var(--color-neon);
-   text-transform: uppercase;
-   letter-spacing: 0.1em;
-   text-shadow:
-    0 0 5px rgba(0, 255, 255, 0.5),
-    0 0 10px var(--color-neon);
-  }
+ body {
+ font-family: var(--font-primary);
+ /* Setting minimal background to prevent issues */
+ background-color: #000000; 
+ color: #ffffff;
+ }
 
-  .container {
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 0 20px;
-  }
-   
-  .section {
-   padding: 100px 0;
-   position: relative;
-  }
+ h1, h2, h3 {
+ font-family: var(--font-display);
+ color: var(--color-neon);
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ /* GLOW REMOVED: text-shadow property was here */
+ }
 
-  .hero-page {
-   padding-top: 150px;
-   padding-bottom: 50px;
-  }
+ .container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 20px;
+ }
  
-  .grid-bg {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   pointer-events: none;
-   z-index: -1;
-   background:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-   background-size: 50px 50px;
-   opacity: 0.1;
-   animation: moveGrid 60s linear infinite;
-  }
+ .section {
+ padding: 100px 0;
+ position: relative;
+ }
 
-  @keyframes moveGrid {
-   from { background-position: 0 0; }
-   to { background-position: 50px 50px; }
-  }
- 
-  @media (max-width: 900px) {
-   .section { padding: 50px 0; }
-   .hero-page { padding-top: 100px; }
-  }
- </style>
+ .hero-page {
+ padding-top: 150px;
+ padding-bottom: 50px;
+ }
+
+ .grid-bg {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ z-index: -1;
+ background:
+  linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+ background-size: 50px 50px;
+ opacity: 0.1;
+ animation: moveGrid 60s linear infinite;
+ }
+
+ @keyframes moveGrid {
+ from { background-position: 0 0; }
+ to { background-position: 50px 50px; }
+ }
+
+ @media (max-width: 900px) {
+ .section { padding: 50px 0; }
+ .hero-page { padding-top: 100px; }
+ }
+</style>
 </body>
 </html>
