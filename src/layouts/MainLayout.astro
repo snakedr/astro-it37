@@ -1,119 +1,107 @@
-// src/layouts/MainLayout.astro
+---
 import Header from '@/components/Header.astro';
 import '@/styles/global.css';
 
-// Важно: активная ссылка по умолчанию 'home'
 const { title = "IT37 | IT-решения для энергетики", activeLink = "home" } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>{title}</title>
+ <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="grid-bg"></div>
- 
-  <Header activeLink={activeLink} /> <slot />
- 
-  <script>
-    // ... (JS-логика бургер-меню остается без изменений)
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.querySelector('.menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
+ <div class="grid-bg"></div>
 
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-          navLinks.classList.toggle('open');
-          menuToggle.classList.toggle('open');
-        });
+ <Header activeLink={activeLink} /> <slot />
 
-        // Закрытие меню при клике на ссылку
-        navLinks.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            menuToggle.classList.remove('open');
-          });
-        });
-      }
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+   const menuToggle = document.querySelector('.menu-toggle');
+   const navLinks = document.querySelector('.nav-links');
+
+   if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+     navLinks.classList.toggle('open');
+     menuToggle.classList.toggle('open');
     });
-  </script>
+
+    navLinks.querySelectorAll('a').forEach(link => {
+     link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.classList.remove('open');
+     });
+    });
+   }
+  });
+ </script>
+
+ <style is:global>
+  :root {
+   --font-primary: 'Roboto', sans-serif;
+   --font-display: 'Orbitron', sans-serif;
+   --font-mono: 'JetBrains Mono', monospace;
+   --color-neon: #00ffff;
+  }
+
+  body {
+   font-family: var(--font-primary);
+  }
+
+  h1, h2, h3 {
+   font-family: var(--font-display);
+   color: var(--color-neon);
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   text-shadow:
+    0 0 5px rgba(0, 255, 255, 0.5),
+    0 0 10px var(--color-neon);
+  }
+
+  .container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 20px;
+  }
+   
+  .section {
+   padding: 100px 0;
+   position: relative;
+  }
+
+  .hero-page {
+   padding-top: 150px;
+   padding-bottom: 50px;
+  }
  
-  <style is:global>
-    /* --- ДОБАВЛЕННЫЕ СТИЛИ ДЛЯ ТЕХНОЛОГИЧНОЙ КИРИЛЛИЦЫ --- */
+  .grid-bg {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+   z-index: -1;
+   background:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+   background-size: 50px 50px;
+   opacity: 0.1;
+   animation: moveGrid 60s linear infinite;
+  }
 
-    :root {
-      /* Определяем переменные шрифтов для чистоты в global.css */
-      --font-primary: 'Roboto', sans-serif;
-      --font-display: 'Orbitron', sans-serif; /* Футуристический */
-      --font-mono: 'JetBrains Mono', monospace; /* Моноширинный для кода */
-      --color-neon: #00ffff; /* Яркий неоновый цвет */
-    }
-
-    /* Применение основного текста */
-    body {
-      font-family: var(--font-primary);
-    }
-
-    /* Технологичный стиль для заголовков */
-    h1, h2, h3 {
-      font-family: var(--font-display);
-      color: var(--color-neon);
-      text-transform: uppercase; /* Все заглавные буквы, усиливает эффект */
-      letter-spacing: 0.1em; /* Увеличение интервала между буквами */
-      text-shadow: 
-        0 0 5px rgba(0, 255, 255, 0.5), /* Мягкий внутренний ореол */
-        0 0 10px var(--color-neon); /* Яркое внешнее свечение */
-    }
-
-    /* --- БАЗОВЫЕ СТИЛИ (Остаются без изменений) --- */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-        /* ... остальные стили ... */
-    .section {
-      padding: 100px 0;
-      position: relative;
-    }
-
-    /* Hero */
-    .hero-page {
-      padding-top: 150px;
-      padding-bottom: 50px;
-    }
-   
-    /* Анимация фона сетки (зависит от переменных из global.css) */
-    .grid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      /* Переменные берутся из global.css */
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-      opacity: 0.1;
-      animation: moveGrid 60s linear infinite;
-    }
-
-    @keyframes moveGrid {
-      from { background-position: 0 0; }
-      to { background-position: 50px 50px; }
-    }
-   
-    @media (max-width: 900px) {
-      .section { padding: 50px 0; }
-      .hero-page { padding-top: 100px; }
-    }
-  </style>
+  @keyframes moveGrid {
+   from { background-position: 0 0; }
+   to { background-position: 50px 50px; }
+  }
+ 
+  @media (max-width: 900px) {
+   .section { padding: 50px 0; }
+   .hero-page { padding-top: 100px; }
+  }
+ </style>
 </body>
 </html>
