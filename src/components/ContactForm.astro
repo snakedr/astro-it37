@@ -1,4 +1,20 @@
 <form id="contactForm">
+    <style>
+        #contactForm label, 
+        #contactForm input[type="text"], 
+        #contactForm input[type="email"], 
+        #contactForm textarea {
+            display: block; /* Заставляет каждый элемент занимать всю ширину */
+            margin-bottom: 15px; /* Добавляет отступ между полями */
+            width: 100%; /* Занимает всю доступную ширину контейнера формы */
+            padding: 8px;
+            box-sizing: border-box; /* Важно, чтобы padding не ломал ширину */
+        }
+        #contactForm textarea {
+            resize: vertical;
+        }
+    </style>
+
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
 
@@ -20,7 +36,6 @@
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Сбор данных формы
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
@@ -28,7 +43,7 @@
         statusMessage.textContent = 'Sending...';
 
         try {
-            // Отправка на API-маршрут /api/submit
+            // Send data to the API route /api/submit
             const response = await fetch('/api/submit', {
                 method: 'POST',
                 headers: {
