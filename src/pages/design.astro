@@ -1,20 +1,16 @@
 ---
-// 1. Импорт всех необходимых компонентов
 import MainLayout from '@/layouts/MainLayout.astro';
-// !!! ИСПРАВЛЕНИЕ 1: Импортируем Header и Footer (как в montazh.astro)
 import Header from '@/components/Header.astro'; 
 import Footer from '@/components/Footer.astro'; 
-// !!! ИСПРАВЛЕНИЕ 2: Меняем ContactBanner на ConstrainedContactBanner
 import ConstrainedContactBanner from '@/components/ConstrainedContactBanner.astro'; 
 
 import DesignAdvantages from '@/components/DesignAdvantages.astro';
 import DesignProcess from '@/components/DesignProcess.astro';
 import DesignVizBlock from '@/components/DesignVizBlock.astro';
 
-// 2. Указываем активную ссылку и контакты
 const ACTIVE_LINK = "Проектирование"; // Для корректного выделения в меню
 const PHONE_PROEKT = "+7 (4932) 37-25-55 (доб. 104)";
-const EMAIL_PROEKT = "proekt@it37.ru";
+const EMAIL_PROEKT = "ssv37@bk.ru";
 ---
 
 <MainLayout title="Проектирование и Аудит | IT37" activeLink={ACTIVE_LINK}>
