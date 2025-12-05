@@ -1,5 +1,5 @@
 ---
-// !!! 1. ПРИНИМАЕМ ПЕРЕМЕННЫЕ (PROPS) ВМЕСТО ЖЕСТКОГО КОДИРОВАНИЯ !!!
+
 const { 
     title = "Связаться с отделом", // Заголовок по умолчанию
     phone = "Телефон не указан",
@@ -11,13 +11,12 @@ const {
 <section id={id} class="contact-banner">
     <h2>{title}</h2>
     <p>
-        **Телефон:** {phone} | **E-mail:** {email}
+        Телефон: {phone} | E-mail: {email}
     </p>
     <a href="/contacts" class="btn">{buttonText}</a>
 </section>
 
 <style>
-    /* Весь CSS-код остаётся прежним, он просто стилизует принятые переменные */
     .contact-banner {
     background: var(--bg-panel);
     color: var(--text-main);
