@@ -1,43 +1,54 @@
 <div class="form-container">
     <style>
-        /* CSS стили для чистого и центрированного вида */
+        /* CSS styles for clean and centered look (using local styles) */
         .form-container {
-            max-width: 600px; /* Ограничиваем максимальную ширину формы */
-            margin: 40px auto; /* Центрируем форму горизонтально */
+            max-width: 600px;
+            margin: 40px auto;
             padding: 20px;
         }
 
-        /* Общие стили для элементов формы */
+        /* General form element styles */
         #contactForm label, 
         #contactForm input[type="text"], 
         #contactForm input[type="email"], 
         #contactForm textarea {
             display: block;
             margin-bottom: 15px;
-            width: 100%; /* Занимают 100% ширины контейнера (600px) */
+            width: 100%;
             padding: 10px;
-            box-sizing: border-box; /* Важно для включения padding в общую ширину */
-            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border: 1px solid var(--text-gray); /* Using global variable for clean look */
             border-radius: 4px;
             font-size: 16px;
+            background-color: transparent;
+            color: var(--text-main);
         }
 
         #contactForm textarea {
             resize: vertical;
         }
 
+        /* FIX: Use var(--accent) for the button color */
         #contactForm button[type="submit"] {
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
-            background-color: #007bff;
-            color: white;
+            
+            /* Using ACCENT color for background and BG-DEEP for text */
+            background-color: var(--accent);
+            color: var(--bg-deep); /* Dark text for contrast on light accent */
+
             cursor: pointer;
             font-size: 16px;
+            font-weight: 700;
+            transition: 0.3s;
         }
 
         #contactForm button[type="submit"]:hover {
-            background-color: #0056b3;
+            /* Keep hover effect simple by reducing opacity */
+            opacity: 0.8;
+            /* Using a fixed color in case var(--accent) is too bright */
+            /* background-color: #00C8C8; */
         }
     </style>
 
@@ -51,7 +62,7 @@
         <label for="message">Message:</label>
         <textarea id="message" name="message" rows="4" required></textarea>
 
-        <button type="submit">Send Application</button>
+        <button type="submit">Отправить</button> 
         
         <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
     </form>
@@ -66,10 +77,10 @@
         event.preventDefault(); // Prevents default browser submission
 
         statusText.textContent = 'Sending...';
-        statusText.style.color = '#555';
+        statusText.style.color = 'var(--text-gray)';
 
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries()); // Convert FormData to plain object
+        const data = Object.fromEntries(formData.entries());
 
         try {
             const response = await fetch('/api/submit', {
@@ -84,17 +95,15 @@
 
             if (response.ok) {
                 statusText.textContent = 'Success: Your application has been sent.';
-                statusText.style.color = 'green';
-                form.reset(); // Clear the form on success
+                statusText.style.color = 'var(--success)';
+                form.reset();
             } else {
-                // Server returned an error status (4xx or 5xx)
                 statusText.textContent = `Error: ${result.message || 'An unknown error occurred.'}`;
-                statusText.style.color = 'red';
+                statusText.style.color = 'var(--orange)';
             }
         } catch (error) {
-            // Network error or fetch failure
             statusText.textContent = 'Error: Could not connect to the server.';
-            statusText.style.color = 'red';
+            statusText.style.color = 'var(--orange)';
         }
     });
 </script>
