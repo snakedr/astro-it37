@@ -1,0 +1,18 @@
+# .gitattributes (Находится в корне проекта)
+
+# Устанавливает автоматическое определение, что является текстовым файлом
+* text=auto
+
+# Принудительно устанавливает окончания строк LF (Unix-style) для всех 
+# исходных файлов в репозитории (Astro, JS, CSS, JSON)
+*.js    text eol=lf
+*.ts    text eol=lf
+*.jsx   text eol=lf
+*.tsx   text eol=lf
+*.astro text eol=lf
+*.css   text eol=lf
+*.json  text eol=lf
+
+# Убедимся, что критически важные файлы, такие как .gitignore, 
+# также используют LF
+.gitignore text eol=lf

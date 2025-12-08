@@ -12,6 +12,7 @@
 /.astro
 /.vercel
 /out
+/email.env
 
 # Файлы логов и кэша
 npm-debug.log*
