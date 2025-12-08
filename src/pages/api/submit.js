@@ -1,55 +1,60 @@
-// src/pages/api/submit.js
+// Импорт Nodemailer для отправки почты
+import nodemailer from 'nodemailer';
+
+// Настройка Nodemailer Transport
+// Используйте ваши учетные данные (предпочтительно из .env файла)
+const transporter = nodemailer.createTransport({
+  host: 'smtp.example.com', // Например, 'smtp.gmail.com'
+  port: 587,
+  secure: false, // true для порта 465, false для других
+  auth: {
+    user: 'YOUR_EMAIL@example.com', // Ваш email
+    pass: 'YOUR_PASS', // Ваш пароль или App Password
+  },
+});
 
 export async function POST({ request }) {
-  // Check Content-Type header
-  if (request.headers.get("content-type") !== "application/json") {
-    return new Response(JSON.stringify({ message: "Unsupported Content Type. Expected application/json" }), {
-      status: 415, // Unsupported Media Type
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
   try {
     const data = await request.json();
     const { name, email, message } = data;
 
-    // Minimal validation: Check for presence of required fields
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ message: "Missing required fields: name, email, or message." }), {
-        status: 400, // Bad Request
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ message: 'Missing required fields.' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
-    /*
-    * *** ТОЛЬКО АНГЛИЙСКИЕ КОММЕНТАРИИ: Logic for sending email or saving data goes here ***
-    *
-    * Example: sending an email using a service like Nodemailer (requires installation/setup)
-    *
-    * const transporter = nodemailer.createTransport({...});
-    * await transporter.sendMail({
-    *   from: '"Contact Form" <no-reply@yourdomain.com>',
-    *   to: "your-target-email@example.com",
-    *   subject: "New Contact Form Submission",
-    *   text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-    * });
-    */
+    // Параметры письма
+    const mailOptions = {
+      from: 'YOUR_EMAIL@example.com', // Отправитель
+      to: 'RECIPIENT_EMAIL@example.com', // Куда отправлять
+      subject: `New Contact Form Submission from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    };
 
-    // Minimal confirmation log for server side
-    console.log(`Received application from ${name} (${email}).`);
+    // Отправка письма
+    await transporter.sendMail(mailOptions);
 
-    // Success response
-    return new Response(JSON.stringify({ message: "Application received." }), {
-      status: 200, // OK
-      headers: { "Content-Type": "application/json" },
-    });
-    
+    // Успешный ответ
+    return new Response(
+      JSON.stringify({ message: 'Email sent successfully.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+
   } catch (error) {
-    // Handle JSON parsing errors or unexpected issues
-    console.error("API error:", error); // Log the error on the server
-    return new Response(JSON.stringify({ message: "Server error processing data." }), {
-      status: 500, // Internal Server Error
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error('Email sending error:', error);
+    
+    // Ответ с ошибкой
+    return new Response(
+      JSON.stringify({ message: 'Failed to send email due to server error.' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }

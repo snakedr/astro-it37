@@ -1,12 +1,20 @@
-# Node dependencies
+# Зависимости
 /node_modules
+/pnpm-lock.yaml
 
-# Astro build output
-/dist
-
-# Logs
-*.log
-
-# Local config
+# Секреты (Обязательно!)
 .env
+.env.local
+.env.*.local
+
+# Выходные файлы сборки Astro/Vercel
+/dist
+/.astro
+/.vercel
+/out
+
+# Файлы логов и кэша
+npm-debug.log*
+.npm
+.yarn/cache
 .DS_Store
