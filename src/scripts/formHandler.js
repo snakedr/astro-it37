@@ -1,26 +1,33 @@
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
+const form = document.getElementById('contact-form');
+const statusText = document.getElementById('form-status');
 
-  const form = e.target;
-  const data = new FormData(form);
-  const body = Object.fromEntries(data.entries());
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusText.textContent = 'Sending...';
+    
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData);
 
-  try {
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (response.ok) {
-      alert('Success: Form submitted.');
+      if (!response.ok) {
+        throw new Error(result.message || `Server error: ${response.status}`);
+      }
+
+      statusText.textContent = 'Message sent!';
       form.reset();
-    } else {
-      alert(`Error: ${result.message || 'Submission failed.'}`);
+
+    } catch (error) {
+      console.error(error);
+      statusText.textContent = `Error: ${error.message}`;
     }
-  } catch (error) {
-    alert('Network error. Try again.');
-  }
-});
+  });
+}

@@ -1,60 +1,40 @@
-// Импорт Nodemailer для отправки почты
-import nodemailer from 'nodemailer';
+export const prerender = false; // Required for SSR on Vercel
+import nodemailer from "nodemailer";
 
-// Настройка Nodemailer Transport
-// Используйте ваши учетные данные (предпочтительно из .env файла)
-const transporter = nodemailer.createTransport({
-  host: 'smtp.example.com', // Например, 'smtp.gmail.com'
-  port: 587,
-  secure: false, // true для порта 465, false для других
-  auth: {
-    user: 'YOUR_EMAIL@example.com', // Ваш email
-    pass: 'YOUR_PASS', // Ваш пароль или App Password
-  },
-});
+export const POST = async ({ request }) => {
+  if (request.headers.get("Content-Type") !== "application/json") {
+    return new Response(JSON.stringify({ message: "Invalid Content-Type" }), { status: 400 });
+  }
 
-export async function POST({ request }) {
   try {
     const data = await request.json();
-    const { name, email, message } = data;
 
-    if (!name || !email || !message) {
-      return new Response(
-        JSON.stringify({ message: 'Missing required fields.' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
+    if (!data.name || !data.email || !data.message) {
+      return new Response(JSON.stringify({ message: "Missing required fields" }), { status: 400 });
     }
 
-    // Параметры письма
-    const mailOptions = {
-      from: 'YOUR_EMAIL@example.com', // Отправитель
-      to: 'RECIPIENT_EMAIL@example.com', // Куда отправлять
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-      `,
-    };
+    const transporter = nodemailer.createTransport({
+      host: import.meta.env.SMTP_HOST,
+      port: import.meta.env.SMTP_PORT,
+      secure: true,
+      auth: {
+        user: import.meta.env.SMTP_USER,
+        pass: import.meta.env.SMTP_PASS,
+      },
+    });
 
-    // Отправка письма
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail({
+      from: import.meta.env.SMTP_USER,
+      to: import.meta.env.SMTP_USER, // Sending to yourself
+      replyTo: data.email,
+      subject: `New Contact: ${data.name}`,
+      text: `From: ${data.email}\n\n${data.message}`,
+    });
 
-    // Успешный ответ
-    return new Response(
-      JSON.stringify({ message: 'Email sent successfully.' }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
+    return new Response(JSON.stringify({ message: "Message sent successfully" }), { status: 200 });
 
   } catch (error) {
-    console.error('Email sending error:', error);
-    
-    // Ответ с ошибкой
-    return new Response(
-      JSON.stringify({ message: 'Failed to send email due to server error.' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    console.error("API Error:", error);
+    return new Response(JSON.stringify({ message: error.message || "Internal Server Error" }), { status: 500 });
   }
-}
+};
