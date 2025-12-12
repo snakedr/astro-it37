@@ -9,8 +9,8 @@
                 IT-решения для энергетики
             </p>
             <div class="social-icons">
-                <a href="#"><img src="/icons/telegram.svg" alt="Telegram"></a>
-                <a href="#"><img src="/icons/vk.svg" alt="VK"></a>
+                <a href="https://t.me/+79303474503"><img src="/telegram.svg" alt="Telegram"></a>
+                <a href="https://vk.com/"><img src="/vk.svg" alt="VK"></a>
             </div>
         </div>
 
@@ -42,6 +42,10 @@
 </footer>
 
 <style>
+    /* Примечание:
+    Предполагается, что переменные (var(--bg-panel), var(--border) и т.д.)
+    определены в вашем глобальном файле стилей или :root.
+    */
     footer {
         background: var(--bg-panel);
         border-top: 1px solid var(--border);
@@ -114,11 +118,13 @@
     .social-icons img {
         width: 24px;
         height: 24px;
+        /* Чистый filter: только 100% серого и повышение яркости */
         filter: grayscale(100%) brightness(1.5);
         transition: filter 0.3s;
     }
     .social-icons a:hover img {
-        filter: grayscale(0%) brightness(1);
+        /* Убрали лишний brightness(1), оставили только grayscale(0) */
+        filter: grayscale(0%);
     }
 
     .footer-bottom {
@@ -157,6 +163,10 @@
         }
         .footer-links {
             text-align: center;
+        }
+        .social-icons {
+            /* Центрирование иконок на мобильных */
+            justify-content: center;
         }
     }
 </style>
